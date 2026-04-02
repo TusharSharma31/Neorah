@@ -2,2347 +2,681 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>NEORAH 2026 — Command Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hair Cafe By Krystal Pune — Premium Salon, Salunke Vihar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/docx@8.2.2/build/index.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   NEORAH 2026 — CINEMATIC LUXURY COMMAND CENTER
-   Design: Dark Opulence × Glassmorphism × Motion
-   ============================================================ */
-
-:root {
-  --gold: #e8c97a;
-  --gold2: #f5d98e;
-  --gold-dim: rgba(232,201,122,0.08);
-  --gold-glow: rgba(232,201,122,0.25);
-  --gold-border: rgba(232,201,122,0.18);
-  --crimson: #c8445a;
-  --crimson-dim: rgba(200,68,90,0.12);
-  --sapphire: #4a9eff;
-  --emerald: #2ed8a8;
-  --bg: #050508;
-  --bg2: #08080d;
-  --glass: rgba(255,255,255,0.032);
-  --glass2: rgba(255,255,255,0.055);
-  --border: rgba(255,255,255,0.065);
-  --border2: rgba(255,255,255,0.11);
-  --text: #f2ede8;
-  --text2: #a09890;
-  --text3: #5a5450;
-  --sidebar-w: 260px;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { height: 100%; }
-body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-  cursor: default;
-}
-
-/* === ANIMATED BACKGROUND === */
-#bg-canvas {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none;
-}
-
-/* === GRAIN OVERLAY === */
-body::after {
-  content: '';
-  position: fixed; inset: 0; z-index: 1;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none; opacity: 0.6;
-}
-
-/* === LAYOUT === */
-#app { position: relative; z-index: 2; display: flex; min-height: 100vh; }
-
-/* === SIDEBAR === */
-#sidebar {
-  width: var(--sidebar-w);
-  height: 100vh;
-  position: fixed;
-  left: 0; top: 0;
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  background: linear-gradient(180deg, rgba(8,6,12,0.98) 0%, rgba(5,4,8,0.99) 100%);
-  border-right: 1px solid var(--gold-border);
-  backdrop-filter: blur(20px);
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-  overflow: hidden;
-}
-
-/* Sidebar glow line */
-#sidebar::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
-
-.sb-header {
-  padding: 32px 24px 24px;
-  border-bottom: 1px solid var(--border);
-}
-
-.sb-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  font-weight: 700;
-  font-style: italic;
-  letter-spacing: -0.5px;
-  background: linear-gradient(135deg, var(--gold2), var(--gold), #c8a855);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.sb-tagline {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text3);
-  font-weight: 500;
-}
-
-/* NAV */
-.sb-nav { padding: 20px 16px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
-
-.nav-btn {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  border: none;
-  background: transparent;
-  color: var(--text3);
-  font-family: 'Outfit', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-  text-align: left;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-btn::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--gold);
-  transform: scaleY(0);
-  transition: transform 0.3s ease;
-  border-radius: 0 2px 2px 0;
-}
-
-.nav-btn:hover {
-  color: var(--text);
-  background: var(--glass);
-}
-
-.nav-btn.active {
-  color: var(--gold);
-  background: var(--gold-dim);
-  font-weight: 600;
-}
-
-.nav-btn.active::before { transform: scaleY(1); }
-
-.nav-icon {
-  width: 32px; height: 32px;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  background: var(--glass);
-  transition: all 0.3s;
-  flex-shrink: 0;
-}
-
-.nav-btn.active .nav-icon {
-  background: var(--gold-dim);
-  box-shadow: 0 0 12px var(--gold-glow);
-}
-
-/* COUNTDOWN */
-.sb-countdown {
-  padding: 16px;
-  margin: 0 16px 16px;
-  background: var(--gold-dim);
-  border: 1px solid var(--gold-border);
-  border-radius: 14px;
-}
-
-.sb-countdown-days {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--gold);
-  letter-spacing: -1px;
-  display: block;
-}
-
-.sb-countdown-label {
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text3);
-  margin-top: 2px;
-  display: block;
-}
-
-/* MUSIC PLAYER */
-.music-player {
-  margin: 0 16px 24px;
-  background: linear-gradient(135deg, rgba(232,201,122,0.06), rgba(200,68,90,0.04));
-  border: 1px solid var(--gold-border);
-  border-radius: 16px;
-  padding: 14px;
-  position: relative;
-  overflow: hidden;
-}
-
-.music-player::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at top right, rgba(232,201,122,0.06) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.mp-track-info {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 10px;
-}
-
-.mp-album {
-  width: 36px; height: 36px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--gold), var(--crimson));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
-  animation: spin-slow 8s linear infinite paused;
-  flex-shrink: 0;
-}
-
-.mp-album.playing { animation-play-state: running; }
-
-@keyframes spin-slow { to { transform: rotate(360deg); } }
-
-.mp-info { flex: 1; min-width: 0; }
-.mp-title { font-size: 11px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.mp-artist { font-size: 9px; color: var(--text3); letter-spacing: 0.5px; margin-top: 1px; }
-
-.mp-controls { display: flex; align-items: center; justify-content: center; gap: 12px; }
-.mp-btn {
-  background: none; border: none; color: var(--text3);
-  cursor: pointer; font-size: 14px; padding: 4px;
-  transition: all 0.2s; border-radius: 50%;
-  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
-}
-.mp-btn:hover { color: var(--gold); transform: scale(1.1); }
-.mp-btn.play {
-  background: var(--gold);
-  color: #05050a;
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  font-size: 12px;
-}
-.mp-btn.play:hover { box-shadow: 0 0 16px var(--gold-glow); transform: scale(1.05); }
-
-.mp-progress {
-  height: 2px;
-  background: var(--border);
-  border-radius: 1px;
-  margin-top: 10px;
-  cursor: pointer;
-  position: relative;
-  overflow: visible;
-}
-.mp-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--gold), var(--gold2));
-  border-radius: 1px;
-  transition: width 0.5s linear;
-  position: relative;
-}
-.mp-progress-fill::after {
-  content: '';
-  position: absolute; right: -3px; top: -2px;
-  width: 6px; height: 6px;
-  background: var(--gold2);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--gold-glow);
-}
-
-.mp-vol {
-  display: flex; align-items: center; gap: 6px; margin-top: 8px;
-}
-.mp-vol-icon { font-size: 10px; color: var(--text3); }
-.mp-vol-slider {
-  flex: 1; height: 2px;
-  -webkit-appearance: none;
-  background: var(--border);
-  border-radius: 1px;
-  outline: none;
-  cursor: pointer;
-}
-.mp-vol-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--gold);
-  cursor: pointer;
-}
-
-/* === MAIN CONTENT === */
-#main {
-  margin-left: var(--sidebar-w);
-  flex: 1;
-  min-height: 100vh;
-  position: relative;
-}
-
-/* === PAGES === */
-.page { display: none; padding: 48px 48px 100px; animation: pageIn 0.5s cubic-bezier(0.4,0,0.2,1); }
-.page.active { display: block; }
-
-@keyframes pageIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* === PAGE HEADER === */
-.page-header { margin-bottom: 48px; }
-.page-eyebrow {
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: flex; align-items: center; gap: 10px;
-}
-.page-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 24px; height: 1px;
-  background: var(--gold);
-}
-.page-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: -1.5px;
-  line-height: 1;
-  color: var(--text);
-}
-.page-title span { font-style: italic; color: var(--gold); }
-.page-subtitle {
-  font-size: 14px;
-  color: var(--text3);
-  margin-top: 10px;
-  font-weight: 400;
-  letter-spacing: 0.2px;
-}
-
-/* === GLASS CARDS === */
-.glass-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-
-.glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border2), transparent);
-}
-
-.glass-card:hover {
-  border-color: var(--border2);
-  background: var(--glass2);
-  transform: translateY(-2px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
-
-.glass-card-gold {
-  background: linear-gradient(135deg, rgba(232,201,122,0.06), rgba(232,201,122,0.02));
-  border: 1px solid var(--gold-border);
-}
-
-/* === STATS GRID === */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 32px;
-}
-
-.stat-card {
-  padding: 24px;
-  position: relative;
-}
-
-.stat-value {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: -1px;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.stat-label {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text3);
-  font-weight: 500;
-}
-
-/* === PROGRESS === */
-.progress-track {
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--gold2));
-  transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
-  position: relative;
-}
-
-.progress-fill::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.3));
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
-}
-
-/* === TEAM TABLE === */
-.team-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
-
-.team-table thead th {
-  font-size: 9px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--text3);
-  font-weight: 600;
-  padding: 0 20px 8px;
-  font-family: 'JetBrains Mono', monospace;
-  text-align: left;
-}
-
-.team-row td {
-  background: var(--glass);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 18px 20px;
-  transition: all 0.3s;
-}
-
-.team-row td:first-child {
-  border-left: 1px solid var(--border);
-  border-radius: 14px 0 0 14px;
-  border-left-width: 2px;
-  border-left-color: transparent;
-}
-
-.team-row td:last-child {
-  border-right: 1px solid var(--border);
-  border-radius: 0 14px 14px 0;
-}
-
-.team-row:hover td {
-  background: var(--glass2);
-  border-color: var(--border2);
-}
-
-.team-row:hover td:first-child { border-left-color: var(--gold); }
-
-/* === STATUS BADGES === */
-.status-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 10px;
-  font-weight: 600;
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  border: none;
-  transition: all 0.3s;
-}
-
-.status-active { background: rgba(74,158,255,0.12); color: var(--sapphire); border: 1px solid rgba(74,158,255,0.2); }
-.status-review { background: rgba(232,201,122,0.12); color: var(--gold); border: 1px solid var(--gold-border); }
-.status-done { background: rgba(46,216,168,0.12); color: var(--emerald); border: 1px solid rgba(46,216,168,0.2); }
-
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.status-active .status-dot { animation: pulse-dot 2s infinite; }
-@keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-
-/* === VIBE === */
-.vibe-btn { background:none; border:none; cursor:pointer; font-size:16px; opacity:0.2; transition:all 0.25s; padding:3px; border-radius:6px; }
-.vibe-btn.active { opacity:1; transform:scale(1.25); filter:drop-shadow(0 0 6px rgba(232,201,122,0.4)); }
-.vibe-btn:not(.active):hover { opacity:0.6; transform:scale(1.1); }
-
-/* === TEXTAREA / INPUT === */
-.cell-ta {
-  background: transparent; border: none; outline: none;
-  width: 100%; font-size: 12px; color: var(--text2);
-  resize: none; font-family: 'Outfit', sans-serif; line-height: 1.6;
-}
-.cell-ta::placeholder { color: var(--text3); }
-.cell-ta:focus { color: var(--text); }
-
-.luxury-input {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 16px;
-  font-size: 13px;
-  color: var(--text);
-  outline: none;
-  font-family: 'Outfit', sans-serif;
-  transition: all 0.3s;
-  width: 100%;
-}
-.luxury-input:focus {
-  border-color: var(--gold-border);
-  background: var(--glass2);
-  box-shadow: 0 0 0 3px rgba(232,201,122,0.06);
-}
-.luxury-input::placeholder { color: var(--text3); }
-
-/* === BUTTONS === */
-.btn-gold {
-  background: linear-gradient(135deg, var(--gold), #c8a855);
-  color: #05050a;
-  border: none;
-  padding: 13px 28px;
-  border-radius: 14px;
-  font-size: 12px;
-  font-weight: 700;
-  font-family: 'Outfit', sans-serif;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.btn-gold::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
-}
-.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--gold-glow); }
-.btn-gold:active { transform: translateY(0); }
-
-.btn-glass {
-  background: var(--glass);
-  color: var(--text2);
-  border: 1px solid var(--border);
-  padding: 11px 22px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  font-family: 'Outfit', sans-serif;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.btn-glass:hover { background: var(--glass2); color: var(--text); border-color: var(--border2); }
-
-/* === DATE NAV === */
-.date-nav {
-  display: flex; align-items: center; gap: 6px;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 6px;
-}
-.date-nav-btn {
-  background: none; border: none; color: var(--text3);
-  padding: 8px 14px; border-radius: 10px;
-  cursor: pointer; font-size: 14px; transition: all 0.25s;
-}
-.date-nav-btn:hover { background: var(--glass2); color: var(--text); }
-.date-nav-today {
-  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
-  padding: 8px 18px; border-radius: 10px; cursor: pointer;
-  background: none; border: none; transition: all 0.25s;
-}
-.date-nav-today:hover { background: var(--gold-dim); }
-
-/* === JOURNAL CARDS === */
-.day-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 22px;
-  display: flex; flex-direction: column; gap: 14px;
-  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-  position: relative;
-  overflow: hidden;
-}
-
-.day-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border2), transparent);
-}
-
-.day-card.today {
-  border-color: var(--gold-border);
-  background: linear-gradient(135deg, rgba(232,201,122,0.05), rgba(5,5,8,0.9));
-}
-
-.day-card.today::after {
-  content: 'TODAY';
-  position: absolute; top: 16px; right: 16px;
-  font-size: 8px; letter-spacing: 2px; font-weight: 700;
-  color: var(--gold); font-family: 'JetBrains Mono', monospace;
-  background: var(--gold-dim);
-  padding: 3px 8px; border-radius: 6px;
-  border: 1px solid var(--gold-border);
-}
-
-.day-card:hover { transform: translateY(-3px); box-shadow: 0 24px 60px rgba(0,0,0,0.5); border-color: var(--border2); }
-.day-card.today:hover { border-color: rgba(232,201,122,0.3); box-shadow: 0 24px 60px rgba(232,201,122,0.08); }
-
-.day-name {
-  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--text3); font-weight: 600; font-family: 'JetBrains Mono', monospace;
-}
-.today .day-name { color: var(--gold); }
-
-.day-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px; font-weight: 700; line-height: 1;
-  color: var(--text);
-}
-.today .day-num { color: var(--gold); }
-
-.j-field {
-  background: rgba(255,255,255,0.02);
-  border: none;
-  border-bottom: 1px solid var(--border);
-  outline: none;
-  width: 100%;
-  font-size: 11px;
-  color: var(--text2);
-  resize: none;
-  font-family: 'Outfit', sans-serif;
-  line-height: 1.7;
-  padding: 6px 0;
-  transition: border-color 0.3s;
-}
-.j-field:focus { border-bottom-color: var(--gold-border); color: var(--text); }
-.j-field::placeholder { color: var(--text3); }
-
-.win-field {
-  background: linear-gradient(135deg, rgba(232,201,122,0.05), transparent);
-  border: 1px solid var(--gold-border);
-  border-radius: 10px;
-  padding: 10px 12px;
-  outline: none;
-  width: 100%;
-  font-size: 11px; font-weight: 600;
-  color: var(--gold);
-  font-family: 'Outfit', sans-serif;
-}
-.win-field::placeholder { color: rgba(232,201,122,0.25); font-weight: 400; }
-
-/* === MOOD/ENERGY === */
-.mood-btn { background:none; border:none; cursor:pointer; font-size:15px; opacity:0.2; transition:all 0.25s; padding:2px; border-radius:6px; }
-.mood-btn.active { opacity:1; transform:scale(1.2); }
-.mood-btn:not(.active):hover { opacity:0.5; }
-
-.e-dot { width:7px; height:7px; border-radius:50%; border:1px solid var(--border); cursor:pointer; transition:all 0.25s; }
-.e-dot.lit { background:var(--gold); border-color:var(--gold); box-shadow:0 0 8px var(--gold-glow); }
-.e-dot:hover { border-color:var(--gold); }
-
-/* === BUDGET === */
-.budget-hero {
-  background: linear-gradient(135deg, rgba(232,201,122,0.08), rgba(200,68,90,0.04), rgba(5,5,8,0));
-  border: 1px solid var(--gold-border);
-  border-radius: 24px;
-  padding: 40px;
-  position: relative;
-  overflow: hidden;
-}
-
-.budget-hero::before {
-  content: '';
-  position: absolute; top: -60px; right: -60px;
-  width: 280px; height: 280px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,201,122,0.06) 0%, transparent 70%);
-}
-
-.balance-display {
-  font-family: 'Playfair Display', serif;
-  font-size: 56px; font-weight: 700; letter-spacing: -2px;
-  line-height: 1;
-}
-
-.balance-pos { color: var(--gold); }
-.balance-neg { color: var(--crimson); }
-
-.budget-bar-track {
-  height: 6px;
-  background: var(--border);
-  border-radius: 3px;
-  overflow: hidden;
-  margin: 10px 0 6px;
-}
-.budget-bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
-}
-
-/* === HABIT CIRCLES === */
-.habit-card-wrap {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 24px;
-  transition: all 0.4s;
-}
-.habit-card-wrap:hover { border-color: var(--border2); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
-
-.h-circle {
-  width: 28px; height: 28px; border-radius: 50%;
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 9px; font-family: 'JetBrains Mono', monospace; font-weight: 500;
-  cursor: pointer; transition: all 0.25s; color: var(--text3);
-}
-.h-circle:hover { border-color: var(--gold); color: var(--text); }
-.h-circle.done {
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  border-color: var(--gold);
-  color: #05050a;
-  font-weight: 700;
-  box-shadow: 0 0 10px var(--gold-glow);
-}
-.h-circle.today { border-color: var(--gold-border); color: var(--gold); font-weight: 700; }
-.h-circle.done.today { background: linear-gradient(135deg, var(--gold2), var(--gold)); color: #05050a; }
-.h-circle.locked { opacity: 0.25; cursor: not-allowed; }
-
-/* === FLOW TIMER === */
-.flow-panel {
-  background: linear-gradient(135deg, rgba(5,5,10,0.98), rgba(10,8,16,0.98));
-  border: 1px solid var(--gold-border);
-  border-radius: 24px;
-  padding: 32px;
-  display: flex; gap: 32px; align-items: center; flex-wrap: wrap;
-  position: relative; overflow: hidden;
-}
-
-.flow-panel::before {
-  content: '';
-  position: absolute; bottom: -40px; right: -40px;
-  width: 200px; height: 200px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,201,122,0.04) 0%, transparent 70%);
-}
-
-.flow-time {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 52px; font-weight: 700; letter-spacing: -2px;
-  color: var(--text);
-  transition: color 0.5s;
-  line-height: 1;
-}
-.flow-time.running {
-  color: var(--gold);
-  text-shadow: 0 0 30px rgba(232,201,122,0.3);
-}
-
-/* === TOAST === */
-.toast {
-  position: fixed; bottom: 32px; right: 32px; z-index: 999;
-  background: var(--glass2);
-  border: 1px solid var(--border2);
-  backdrop-filter: blur(20px);
-  border-radius: 14px;
-  padding: 16px 24px;
-  font-size: 13px; font-weight: 500;
-  display: flex; align-items: center; gap: 10px;
-  transform: translateY(80px) scale(0.95);
-  opacity: 0;
-  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-  pointer-events: none;
-  max-width: 360px;
-}
-.toast.show { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
-.toast.success { border-color: rgba(46,216,168,0.3); }
-.toast.success .t-icon { color: var(--emerald); }
-.toast.gold { border-color: var(--gold-border); }
-.toast.gold .t-icon { color: var(--gold); }
-.t-icon { font-size: 16px; }
-
-/* === SELECT === */
-select {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 12px;
-  color: var(--text);
-  outline: none;
-  font-family: 'Outfit', sans-serif;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-/* === DIVIDER === */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 24px 0;
-}
-
-/* === SECTION LABEL === */
-.section-label {
-  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--text3); font-weight: 600; font-family: 'JetBrains Mono', monospace;
-  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
-}
-.section-label::after {
-  content: ''; flex: 1; height: 1px; background: var(--border);
-}
-
-/* === WEEKLY TARGETS === */
-.target-area {
-  background: none;
-  border: none;
-  outline: none;
-  width: 100%;
-  color: var(--text2);
-  font-size: 12px;
-  resize: none;
-  font-family: 'Outfit', sans-serif;
-  line-height: 1.8;
-  min-height: 80px;
-}
-.target-area::placeholder { color: var(--text3); }
-.target-area:focus { color: var(--text); }
-
-/* === BILL TAG === */
-.bill-tag {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 6px 12px;
-  font-size: 11px;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* === MOBILE NAV === */
-#mob-nav {
-  display: none;
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: rgba(5,5,8,0.98);
-  border-top: 1px solid var(--gold-border);
-  backdrop-filter: blur(20px);
-  z-index: 50;
-  padding: 10px 20px;
-  padding-bottom: env(safe-area-inset-bottom, 10px);
-}
-.mob-nav-items { display: flex; justify-content: space-around; }
-.mob-nav-btn {
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-  background: none; border: none; color: var(--text3);
-  font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
-  font-family: 'Outfit', sans-serif; font-weight: 600;
-  padding: 6px 12px; border-radius: 12px;
-  cursor: pointer; transition: all 0.3s;
-}
-.mob-nav-btn .mn-icon { font-size: 20px; }
-.mob-nav-btn.active, .mob-nav-btn:hover { color: var(--gold); }
-
-#mob-overlay {
-  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-  z-index: 48; backdrop-filter: blur(4px);
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-/* === SLOT BLOCKS === */
-.slot-block {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 8px 10px;
-  flex: 1;
-}
-.slot-label { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-family: 'JetBrains Mono', monospace; font-weight: 600; display: block; margin-bottom: 4px; }
-.slot-input { background: none; border: none; outline: none; font-size: 10px; color: var(--text2); width: 100%; font-family: 'Outfit', sans-serif; }
-.slot-input::placeholder { color: var(--text3); }
-.slot-input:focus { color: var(--text); }
-
-/* === STREAK === */
-.streak-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  background: rgba(255,150,0,0.08);
-  border: 1px solid rgba(255,150,0,0.15);
-  color: #ff9f43;
-  padding: 3px 9px; border-radius: 8px;
-  font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 600;
-}
-
-/* === FLOAT PARTICLES === */
-.particle { position: fixed; pointer-events: none; border-radius: 50%; z-index: 1; }
-
-/* === REPORT MODAL === */
-#reportModal {
-  display: none; position: fixed; inset: 0; z-index: 200;
-  background: rgba(2,2,5,0.95); backdrop-filter: blur(16px);
-  overflow-y: auto; animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.modal-inner { max-width: 900px; margin: 48px auto; padding: 0 24px 80px; }
-
-/* CUSTOM CURSOR GLOW */
-.cursor-glow {
-  position: fixed; pointer-events: none; z-index: 9999;
-  width: 300px; height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,201,122,0.025) 0%, transparent 70%);
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 900px) {
-  #sidebar { transform: translateX(-100%); }
-  #sidebar.open { transform: translateX(0); }
-  #mob-overlay.open { display: block; }
-  #main { margin-left: 0; }
-  .page { padding: 24px 20px 100px; }
-  .page-title { font-size: 32px; }
-  #mob-nav { display: block; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .flow-panel { gap: 20px; }
-}
-
-/* === ENTRY ANIMATIONS === */
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+:root{
+  --gold:#c9a96e;--gold-l:#e2c48f;--gold-d:#a07840;
+  --bg:#faf8f3;--bg2:#f4efe3;--bg3:#ede7d7;
+  --surface:rgba(0,0,0,.04);--border:rgba(160,120,64,.18);
+  --text:#1a1410;--text2:rgba(26,20,16,.58);--text3:rgba(26,20,16,.32);
+  --nav:#faf8f3ee;--ease:cubic-bezier(.16,1,.3,1);
+}
+body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+::selection{background:var(--gold);color:#fff}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+
+#prog{position:fixed;top:0;left:0;height:2px;z-index:9999;background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-l));width:0;box-shadow:0 0 8px var(--gold);transition:width .08s linear}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;height:74px;
+  background:var(--nav);backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid var(--border);transition:height .3s,box-shadow .3s;
+}
+nav.scrolled{height:60px;box-shadow:0 4px 30px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.06em;display:flex;flex-direction:column;line-height:1.1}
+.nav-logo span{color:var(--gold);font-weight:300;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;margin-top:3px}
+.nav-links{display:flex;gap:30px;list-style:none;align-items:center}
+.nav-links a{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text2);position:relative;padding-bottom:2px;transition:color .3s}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:var(--gold)} .nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:14px}
+.btn-book-nav{
+  background:var(--gold);color:#fff;padding:9px 24px;border:none;
+  font-family:'Jost',sans-serif;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;transition:all .3s
+}
+.btn-book-nav:hover{background:var(--gold-d);box-shadow:0 0 20px rgba(201,169,110,.35)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:1.5px;background:var(--text);display:block}
+
+.mob-nav{
+  position:fixed;inset:0;z-index:999;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;
+  opacity:0;pointer-events:none;transition:opacity .4s
+}
+.mob-nav.open{opacity:1;pointer-events:all}
+.mob-nav a{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;letter-spacing:.04em}
+.mob-nav a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:24px;right:28px;font-size:1.4rem;cursor:pointer;color:var(--text2);background:none;border:none}
+
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;align-items:center;padding:140px 70px 100px 60px;position:relative;z-index:2;background:var(--bg)}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{position:absolute;inset:0;transform:scale(1.08);animation:heroImgIn 1.8s var(--ease) both}
+@keyframes heroImgIn{from{transform:scale(1.15);opacity:.6}to{transform:scale(1.08);opacity:1}}
+.hero-right-overlay{position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 30%),linear-gradient(180deg,transparent 60%,rgba(250,248,243,.4) 100%)}
+.hero-content{max-width:560px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp 1s .2s both}
+.hero-eyebrow-line{width:36px;height:1px;background:var(--gold)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,5rem);font-weight:300;line-height:1.0;margin-bottom:12px;opacity:0;animation:fadeUp 1.1s .35s both}
+.hero-title em{font-style:italic;color:var(--gold-d);display:block}
+.hero-title strong{font-weight:700;display:block}
+.hero-tag{font-size:.78rem;color:var(--text2);font-weight:300;line-height:1.8;max-width:440px;margin-bottom:44px;opacity:0;animation:fadeUp 1.1s .5s both}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 1.1s .65s both}
+.btn-primary,.btn-submit{
+  background:var(--gold);color:#fff;border:none;cursor:pointer;padding:15px 40px;
+  font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:500;display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden;transition:all .35s var(--ease)
+}
+.btn-primary::before,.btn-submit::before{
+  content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.22) 50%,transparent 75%);
+  transform:translateX(-100%);transition:transform .55s
+}
+.btn-primary:hover::before,.btn-submit:hover::before{transform:translateX(100%)}
+.btn-primary:hover,.btn-submit:hover{box-shadow:0 0 36px rgba(201,169,110,.4);transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent;color:var(--text);border:1px solid rgba(26,20,16,.2);
+  padding:15px 36px;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;transition:all .3s
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-badge{
+  position:absolute;bottom:48px;left:60px;z-index:3;background:var(--bg);border:1px solid var(--border);
+  padding:18px 24px;display:flex;align-items:center;gap:16px;box-shadow:0 8px 40px rgba(0,0,0,.08);opacity:0;animation:fadeUp 1.1s .9s both
+}
+.badge-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;line-height:1}
+.badge-num span{color:var(--gold)}
+.badge-stars{color:var(--gold);font-size:.75rem;letter-spacing:2px;margin-bottom:2px}
+.badge-label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+.badge-div{width:1px;height:44px;background:var(--border)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+.scroll-hint{position:absolute;bottom:32px;right:40px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.2s both}
+.scroll-line-v{width:1px;height:40px;background:var(--text3);position:relative;overflow:hidden}
+.scroll-line-v::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--gold);animation:scrollV 2s ease-in-out infinite}
+@keyframes scrollV{0%{top:-100%}50%{top:100%}100%{top:100%}}
+.scroll-hint-label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);writing-mode:vertical-rl}
+
+.marquee-section{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2)}
+.marquee-track{display:flex;width:max-content;animation:marq 28s linear infinite}
+.marquee-item{display:inline-flex;align-items:center;gap:20px;padding:13px 28px;white-space:nowrap;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text2)}
+.m-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.5}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+section{padding:120px 60px}
+.s-tag{display:inline-flex;align-items:center;gap:12px;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.s-tag::before{content:'';width:30px;height:1px;background:var(--gold)}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.1}
+.s-title em{font-style:italic;color:var(--gold)}
+.s-title strong{font-weight:700}
+.s-sub{font-size:.88rem;line-height:1.85;color:var(--text2);font-weight:300;max-width:620px;margin-top:16px}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .75s ease,transform .75s var(--ease)}
+.reveal.v{opacity:1;transform:translateY(0)}
+
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-photos{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:280px 220px;gap:8px;position:relative}
+.about-photos .p1{grid-row:span 2}
+.ap{overflow:hidden;position:relative}
+.ap img{transition:transform .7s var(--ease)}
+.ap:hover img{transform:scale(1.06)}
+.about-corner{position:absolute;top:-14px;left:-14px;width:44px;height:44px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);z-index:2}
+.about-badge{position:absolute;bottom:-18px;right:-18px;z-index:3;background:var(--gold);color:#fff;padding:18px 22px;text-align:center}
+.about-badge .num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1}
+.about-badge .lbl{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;margin-top:2px;opacity:.85}
+.about-bullets{margin-top:32px;display:flex;flex-direction:column;gap:13px}
+.ab{display:flex;align-items:center;gap:12px;font-size:.82rem;color:var(--text2);font-weight:300}
+.ab-dot{width:5px;height:5px;background:var(--gold);flex-shrink:0}
+.about-stats{display:flex;flex-direction:column;gap:22px;margin-top:40px}
+.a-stat-row{display:flex;align-items:center;gap:18px}
+.a-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:var(--gold);min-width:72px;line-height:1}
+.a-vline{width:1px;height:36px;background:var(--border);flex-shrink:0}
+.a-desc{font-size:.8rem;color:var(--text2);font-weight:300;line-height:1.5}
+
+#services{background:var(--bg)}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:64px}
+.sc{background:var(--bg);padding:44px 32px;position:relative;overflow:hidden;transition:background .4s}
+.sc::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.sc::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,169,110,.05) 0%,transparent 70%);opacity:0;transition:opacity .4s}
+.sc:hover{background:var(--bg2)} .sc:hover::before{transform:scaleX(1)} .sc:hover::after{opacity:1}
+.sc-icon{width:50px;height:50px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:26px;font-size:1.3rem;transition:transform .4s var(--ease)}
+.sc:hover .sc-icon{transform:scale(1.12)}
+.sc-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;margin-bottom:12px}
+.sc-desc{font-size:.78rem;color:var(--text2);line-height:1.75;font-weight:300}
+.sc-price{margin-top:24px;font-size:.7rem;letter-spacing:.1em;color:var(--gold)}
+.sc-arrow{position:absolute;bottom:32px;right:32px;font-size:.85rem;color:var(--gold);opacity:0;transform:translateX(-8px);transition:all .3s}
+.sc:hover .sc-arrow{opacity:1;transform:translateX(0)}
+
+#gallery{background:var(--bg2);padding:120px 0}
+.gallery-header{padding:0 60px;margin-bottom:56px}
+.gallery-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:320px 260px;gap:4px}
+.gi{overflow:hidden;position:relative;background:var(--bg3)}
+.gi:first-child{grid-row:span 2}
+.gi img{transition:transform .65s var(--ease)}
+.gi:hover img{transform:scale(1.07)}
+.gi-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(26,20,16,.65) 100%);opacity:0;transition:opacity .4s;display:flex;align-items:flex-end;padding:28px}
+.gi:hover .gi-overlay{opacity:1}
+.gi-label{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+
+#reviews{background:var(--bg)}
+.reviews-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:32px;margin-bottom:64px}
+.rating-block{display:flex;align-items:center;gap:24px}
+.r-big{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;line-height:1}
+.r-big span{color:var(--gold)}
+.r-stars{color:var(--gold);font-size:1rem;letter-spacing:3px;margin-bottom:4px}
+.r-count{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
+.r-bars{display:flex;flex-direction:column;gap:6px}
+.rb-row{display:flex;align-items:center;gap:10px}
+.rb-lbl{font-size:.68rem;color:var(--text3);width:12px;text-align:right}
+.rb-track{width:100px;height:3px;background:var(--surface);border-radius:2px;overflow:hidden}
+.rb-fill{height:100%;background:var(--gold);border-radius:2px;width:0;transition:width 1.2s var(--ease)}
+.slider-wrap{position:relative;overflow:hidden}
+.slider-track{display:flex;transition:transform .6s var(--ease)}
+.review-slide{min-width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.rc{background:var(--bg2);border:1px solid var(--border);padding:36px 30px;transition:border-color .3s,transform .3s,box-shadow .3s}
+.rc:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.06)}
+.rc-quote{font-family:'Cormorant Garamond',serif;font-size:3.2rem;color:var(--gold);opacity:.2;line-height:.5;margin-bottom:18px;font-style:italic}
+.rc-text{font-size:.83rem;line-height:1.85;color:var(--text2);font-style:italic;font-weight:300;margin-bottom:24px}
+.rc-stars{color:var(--gold);font-size:.72rem;letter-spacing:2px;margin-bottom:12px}
+.rc-name{font-size:.8rem;font-weight:500;letter-spacing:.04em}
+.rc-meta{font-size:.68rem;color:var(--text3);margin-top:2px}
+.slider-controls{display:flex;gap:10px;margin-top:44px;justify-content:center;align-items:center}
+.s-btn{width:44px;height:44px;border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--text2);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.s-btn:hover{border-color:var(--gold);color:var(--gold)}
+.s-dots{display:flex;gap:8px}
+.s-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);cursor:pointer;transition:all .3s}
+.s-dot.a{background:var(--gold);width:22px;border-radius:3px}
+
+#team{background:var(--bg2)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px}
+.tc{border:1px solid var(--border);overflow:hidden;transition:border-color .4s,transform .4s var(--ease),box-shadow .4s}
+.tc:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 24px 70px rgba(0,0,0,.08)}
+.tc-avatar{aspect-ratio:3/4;background:var(--bg3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.tc-avatar-letter{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:var(--gold);opacity:.35;transition:transform .4s var(--ease);user-select:none}
+.tc:hover .tc-avatar-letter{transform:scale(1.06)}
+.tc-avatar-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 70%,rgba(201,169,110,.07) 0%,transparent 65%)}
+.tc-info{padding:20px 22px;background:var(--bg)}
+.tc-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;margin-bottom:4px}
+.tc-role{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+.tc-spec{font-size:.74rem;color:var(--text3);margin-top:5px;font-weight:300}
+
+#booking{background:var(--bg)}
+.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.booking-visual{background:var(--bg2);border:1px solid var(--border);padding:52px 44px;position:relative;overflow:hidden}
+.booking-visual::before{content:'';position:absolute;top:-40%;right:-40%;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,.07) 0%,transparent 70%)}
+.b-hl{display:flex;gap:18px;align-items:flex-start;margin-top:28px}
+.b-icon{color:var(--gold);font-size:1.1rem;margin-top:2px;flex-shrink:0}
+.b-hl-title{font-size:.85rem;font-weight:500;margin-bottom:3px}
+.b-hl-desc{font-size:.76rem;color:var(--text2);font-weight:300;line-height:1.6}
+.b-hl-desc a{color:var(--gold)}
+.form{display:flex;flex-direction:column;gap:16px}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fl{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text2)}
+.fi,.fs,.fta{background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:13px 15px;font-family:'Jost',sans-serif;font-size:.84rem;font-weight:300;outline:none;transition:border-color .3s,box-shadow .3s}
+.fi::placeholder,.fta::placeholder{color:var(--text3)}
+.fi:focus,.fs:focus,.fta:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.1)}
+.fta{resize:vertical;min-height:90px}
+.form-note{font-size:.7rem;color:var(--text3);text-align:center}
+
+#contact{background:var(--bg2);padding:80px 60px;border-top:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.cb{display:flex;gap:16px;align-items:flex-start}
+.c-icon{color:var(--gold);font-size:1.1rem;margin-top:2px;flex-shrink:0}
+.c-lbl{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
+.c-val{font-size:.86rem;font-weight:300;line-height:1.65}
+.c-val a:hover{color:var(--gold)}
+.open-pill{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;background:rgba(111,207,151,.1);border:1px solid rgba(111,207,151,.2);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:#6fcf97;margin-top:6px}
+.open-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:#6fcf97;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+footer{background:#100e0b;border-top:1px solid rgba(201,169,110,.1);padding:60px 60px 36px}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:rgba(250,248,243,.9);letter-spacing:.06em;margin-bottom:5px}
+.f-logo span{color:var(--gold)}
+.f-sub{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,248,243,.25);margin-bottom:18px}
+.f-desc{font-size:.78rem;color:rgba(250,248,243,.35);line-height:1.8;font-weight:300;max-width:260px}
+.f-socials{display:flex;gap:9px;margin-top:22px}
+.f-soc{width:34px;height:34px;border:1px solid rgba(250,248,243,.1);display:flex;align-items:center;justify-content:center;color:rgba(250,248,243,.35);transition:all .3s}
+.f-soc:hover{border-color:var(--gold);color:var(--gold)}
+.f-col-title{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,248,243,.25);margin-bottom:18px}
+.f-links{list-style:none;display:flex;flex-direction:column;gap:11px}
+.f-links a{font-size:.8rem;color:rgba(250,248,243,.4);font-weight:300;transition:color .3s}
+.f-links a:hover{color:var(--gold)}
+.fb{border-top:1px solid rgba(250,248,243,.06);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.f-copy{font-size:.7rem;color:rgba(250,248,243,.2);font-weight:300}
+.f-deva{font-size:.82rem;color:rgba(250,248,243,.15)}
+
+#back-top{
+  position:fixed;bottom:28px;right:28px;z-index:999;width:42px;height:42px;background:var(--gold);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;
+  opacity:0;transform:translateY(16px);pointer-events:none;transition:all .4s var(--ease)
+}
+#back-top.v{opacity:1;transform:translateY(0);pointer-events:all}
+#back-top:hover{background:var(--gold-d);box-shadow:0 0 18px rgba(201,169,110,.4)}
+
+@media(max-width:1200px){.services-grid{grid-template-columns:repeat(2,1fr)}.team-grid{grid-template-columns:repeat(2,1fr)}.ft{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:120px 24px 80px}
+  .about-grid,.booking-grid{grid-template-columns:1fr;gap:48px}
+  section{padding:80px 24px}
+  nav{padding:0 24px}
+  .nav-links,.btn-book-nav{display:none}
+  .hamburger{display:flex}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gi:first-child{grid-row:span 1}
+  .contact-grid{grid-template-columns:1fr}
+  .ft{grid-template-columns:1fr;gap:32px}
+  #gallery{padding:80px 0}.gallery-header{padding:0 24px}
+  .review-slide{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .hero-badge{left:24px;bottom:32px}
+  .about-photos{grid-template-columns:1fr;grid-template-rows:260px 180px 180px}
+  .about-photos .p1{grid-row:span 1}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .form-row2{grid-template-columns:1fr}
+  .fb{flex-direction:column;text-align:center}
 }
-.animate-in { animation: slideUp 0.5s cubic-bezier(0.4,0,0.2,1) both; }
-.delay-1 { animation-delay: 0.05s; }
-.delay-2 { animation-delay: 0.1s; }
-.delay-3 { animation-delay: 0.15s; }
-.delay-4 { animation-delay: 0.2s; }
-.delay-5 { animation-delay: 0.25s; }
 </style>
 </head>
 <body>
 
-<!-- CURSOR GLOW -->
-<div class="cursor-glow" id="cursorGlow"></div>
+<div id="prog"></div>
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<!-- ANIMATED BG CANVAS -->
-<canvas id="bg-canvas"></canvas>
-
-<!-- FLOATING PARTICLES -->
-<div id="particles"></div>
-
-<!-- MOBILE OVERLAY -->
-<div id="mob-overlay" onclick="closeSidebar()"></div>
-
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <span class="t-icon" id="toast-icon">✦</span>
-  <span id="toast-msg">Action completed</span>
+<div class="mob-nav" id="mob-nav">
+  <button class="mob-close" id="mob-close">✕</button>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#gallery" onclick="closeMob()">Gallery</a>
+  <a href="#reviews" onclick="closeMob()">Reviews</a>
+  <a href="#team" onclick="closeMob()">Team</a>
+  <a href="#booking" onclick="closeMob()">Book Now</a>
 </div>
 
-<div id="app">
-  <!-- ============ SIDEBAR ============ -->
-  <nav id="sidebar">
-    <div class="sb-header">
-      <span class="sb-logo">Neorah</span>
-      <span class="sb-tagline">2026 Command Center</span>
-    </div>
+<nav id="nav">
+  <a href="#" class="nav-logo">Hair Cafe By Krystal<span>Salunke Vihar · Pune</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#booking">Book</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#booking" class="btn-book-nav">Book Appointment</a>
+    <div class="hamburger" id="ham" onclick="openMob()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
 
-    <div class="sb-nav">
-      <button class="nav-btn active" onclick="showPage('roadmap',this)">
-        <span class="nav-icon">◈</span>
-        <span>Roadmap</span>
-      </button>
-      <button class="nav-btn" onclick="showPage('journal',this)">
-        <span class="nav-icon">✦</span>
-        <span>Journal</span>
-      </button>
-      <button class="nav-btn" onclick="showPage('budget',this)">
-        <span class="nav-icon">◎</span>
-        <span>Budget OS</span>
-      </button>
-      <button class="nav-btn" onclick="showPage('habits',this)">
-        <span class="nav-icon">⬡</span>
-        <span>Habits</span>
-      </button>
-
-      <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--border);margin-top:20px;">
-        <button class="nav-btn" onclick="generateWordDoc()" style="font-size:12px;">
-          <span class="nav-icon" style="font-size:13px;">↓</span>
-          <span>Export Report</span>
-        </button>
-        <button class="nav-btn" onclick="exportData()" style="font-size:12px;">
-          <span class="nav-icon" style="font-size:13px;">⬡</span>
-          <span>Backup JSON</span>
-        </button>
-        <button class="nav-btn" onclick="toggleThemeFn()" style="font-size:12px;">
-          <span class="nav-icon" style="font-size:13px;">◑</span>
-          <span id="themeLabel">Dark Mode</span>
-        </button>
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span class="hero-eyebrow-line"></span>Premium Hair & Nail Salon · Salunke Vihar, Pune</div>
+      <h1 class="hero-title">
+        Hair, Nails,<br>Beauty.
+        <em>Luxury Results</em>
+        <strong>Every Visit.</strong>
+      </h1>
+      <p class="hero-tag">A premium salon experience known for beautiful haircuts, hair colour, nail artistry, braids, treatments, and a warm team clients keep recommending by name.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary">Book Appointment →</a>
+        <a href="#services" class="btn-ghost">Our Services</a>
       </div>
     </div>
-
-    <!-- COUNTDOWN -->
-    <div class="sb-countdown">
-      <span class="sb-countdown-days" id="countdown">—</span>
-      <span class="sb-countdown-label">Days left in 2026</span>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1400&q=80" alt="Hair Cafe By Krystal interior">
+    <div class="hero-right-overlay"></div>
+  </div>
+  <div class="hero-badge">
+    <div>
+      <div class="badge-num">4.<span>8</span></div>
+      <div class="badge-stars">★★★★★</div>
+      <div class="badge-label">264 Reviews</div>
     </div>
-
-    <!-- MUSIC PLAYER -->
-    <div class="music-player">
-      <div class="mp-track-info">
-        <div class="mp-album" id="mpAlbum">♪</div>
-        <div class="mp-info">
-          <div class="mp-title" id="mpTitle">Deep Focus</div>
-          <div class="mp-artist" id="mpArtist">Neorah Radio</div>
-        </div>
-      </div>
-      <div class="mp-controls">
-        <button class="mp-btn" onclick="prevTrack()" title="Previous">⏮</button>
-        <button class="mp-btn play" id="mpPlayBtn" onclick="togglePlay()">▶</button>
-        <button class="mp-btn" onclick="nextTrack()" title="Next">⏭</button>
-      </div>
-      <div class="mp-progress" id="mpProgress" onclick="seekTrack(event)">
-        <div class="mp-progress-fill" id="mpProgressFill" style="width:0%"></div>
-      </div>
-      <div class="mp-vol">
-        <span class="mp-vol-icon">🔈</span>
-        <input type="range" class="mp-vol-slider" id="mpVol" min="0" max="100" value="60" oninput="setVolume(this.value)">
-        <span class="mp-vol-icon">🔊</span>
-      </div>
+    <div class="badge-div"></div>
+    <div>
+      <div class="badge-num" style="font-size:1.5rem">7<span>+</span></div>
+      <div class="badge-label" style="margin-top:6px">Specialists</div>
     </div>
-  </nav>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line-v"></div>
+    <span class="scroll-hint-label">Scroll</span>
+  </div>
+</section>
 
-  <!-- ============ MAIN ============ -->
-  <div id="main">
-
-    <!-- ========== ROADMAP PAGE ========== -->
-    <div class="page active" id="page-roadmap">
-      <div class="page-header animate-in">
-        <div class="page-eyebrow">Team Operations</div>
-        <h1 class="page-title">Daily <span>Sync</span></h1>
-        <p class="page-subtitle" id="syncDateLabel">Loading today's operations...</p>
-      </div>
-
-      <!-- STATS -->
-      <div class="stats-grid animate-in delay-1">
-        <div class="glass-card glass-card-gold stat-card">
-          <span class="stat-value" id="progressPercent" style="color:var(--gold);">0%</span>
-          <span class="stat-label">Team Completion</span>
-          <div class="progress-track" style="margin-top:14px;">
-            <div class="progress-fill" id="progressBar" style="width:0%"></div>
-          </div>
-        </div>
-        <div class="glass-card stat-card">
-          <span class="stat-value" id="memberCount" style="color:var(--sapphire);">0</span>
-          <span class="stat-label">Active Members</span>
-        </div>
-        <div class="glass-card stat-card">
-          <span class="stat-value" id="doneCount" style="color:var(--emerald);">0</span>
-          <span class="stat-label">Shipped Today</span>
-        </div>
-        <div class="glass-card stat-card">
-          <span class="stat-value" id="daysLeft" style="color:var(--gold);">—</span>
-          <span class="stat-label">Days Remaining</span>
-        </div>
-      </div>
-
-      <!-- TABLE -->
-      <div class="glass-card animate-in delay-2" style="padding:32px;margin-top:0;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px;">
-          <div class="date-nav">
-            <button class="date-nav-btn" onclick="changeDay(-1)">←</button>
-            <button class="date-nav-today" onclick="pivot=new Date();renderTeam()">TODAY</button>
-            <button class="date-nav-btn" onclick="changeDay(1)">→</button>
-          </div>
-          <button onclick="addMember()" class="btn-gold">+ Add Member</button>
-        </div>
-
-        <div style="overflow-x:auto;">
-          <table class="team-table">
-            <thead>
-              <tr>
-                <th>Member</th>
-                <th>Vibe</th>
-                <th>Status</th>
-                <th>Done Today</th>
-                <th>Tomorrow</th>
-                <th style="text-align:right;">·</th>
-              </tr>
-            </thead>
-            <tbody id="teamBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ========== JOURNAL PAGE ========== -->
-    <div class="page" id="page-journal">
-      <div class="page-header animate-in">
-        <div class="page-eyebrow">Personal Intelligence</div>
-        <h1 class="page-title">Daily <span>Journal</span></h1>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:12px;">
-          <p class="page-subtitle" id="weekDisplay">Week loading...</p>
-          <div class="date-nav">
-            <button class="date-nav-btn" onclick="changeWeek(-7)">←</button>
-            <button class="date-nav-today" onclick="jPivot=new Date();renderJournal()">TODAY</button>
-            <button class="date-nav-btn" onclick="changeWeek(7)">→</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- WEEKLY TARGETS -->
-      <div class="glass-card glass-card-gold animate-in delay-1" style="padding:28px;margin-bottom:28px;">
-        <div class="section-label">Core Weekly Targets</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" id="weekTargetsGrid">
-          <div>
-            <div class="section-label" style="color:var(--sapphire);">📚 Study / Skills</div>
-            <textarea id="weekStudy" class="target-area" oninput="saveWeekTarget('study',this.value)" placeholder="What will you learn this week..."></textarea>
-          </div>
-          <div>
-            <div class="section-label" style="color:var(--emerald);">🏃 Health / Body</div>
-            <textarea id="weekHealth" class="target-area" oninput="saveWeekTarget('health',this.value)" placeholder="Movement & wellness goals..."></textarea>
-          </div>
-          <div>
-            <div class="section-label" style="color:var(--gold);">💼 Career / Work</div>
-            <textarea id="weekCareer" class="target-area" oninput="saveWeekTarget('career',this.value)" placeholder="Professional outcomes..."></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- DAY CARDS -->
-      <div id="journalGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;"></div>
-    </div>
-
-    <!-- ========== BUDGET PAGE ========== -->
-    <div class="page" id="page-budget">
-      <div class="page-header animate-in">
-        <div class="page-eyebrow">Financial Intelligence</div>
-        <h1 class="page-title">Budget <span>OS</span></h1>
-        <div style="display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap;">
-          <select id="selMonth" onchange="changeDate()" style="padding:10px 14px;">
-            <option value="0">January</option><option value="1">February</option><option value="2">March</option>
-            <option value="3">April</option><option value="4">May</option><option value="5">June</option>
-            <option value="6">July</option><option value="7">August</option><option value="8">September</option>
-            <option value="9">October</option><option value="10">November</option><option value="11">December</option>
-          </select>
-          <select id="selYear" onchange="changeDate()" style="padding:10px 14px;">
-            <option value="2026">2026</option><option value="2027">2027</option>
-          </select>
-          <button onclick="toggleReport(true)" class="btn-gold">Financial Report</button>
-        </div>
-      </div>
-
-      <!-- BALANCE HERO -->
-      <div class="budget-hero animate-in delay-1" style="margin-bottom:24px;">
-        <div class="section-label">Available Balance</div>
-        <div class="balance-display balance-pos" id="accountBalance">₹0</div>
-        <div style="font-size:12px;color:var(--text3);margin-top:10px;" id="viewingDate"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;">
-          <div>
-            <div class="section-label">Daily Safe Limit</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--emerald);" id="dailyLimit">₹0</div>
-          </div>
-          <div>
-            <div class="section-label">Lifetime Savings</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--gold);" id="ytdSavings">₹0</div>
-            <div style="font-size:11px;color:var(--text3);margin-top:2px;">Total spent: <span id="ytdExpenses" style="color:var(--crimson);">₹0</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ALLOCATION BARS -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;" class="animate-in delay-2">
-        <div class="glass-card" style="padding:22px;" id="cardNeeds">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-            <span style="font-size:11px;font-weight:700;color:var(--sapphire);">Needs</span>
-            <span id="labelNeeds" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;">₹0</span>
-          </div>
-          <div class="budget-bar-track"><div id="fillNeeds" class="budget-bar-fill" style="background:var(--sapphire);width:0%"></div></div>
-          <div id="statNeeds" style="font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;">0% utilized</div>
-        </div>
-        <div class="glass-card" style="padding:22px;" id="cardWants">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-            <span style="font-size:11px;font-weight:700;color:#c77dff;">Wants</span>
-            <span id="labelWants" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;">₹0</span>
-          </div>
-          <div class="budget-bar-track"><div id="fillWants" class="budget-bar-fill" style="background:#c77dff;width:0%"></div></div>
-          <div id="statWants" style="font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;">0% utilized</div>
-        </div>
-        <div class="glass-card" style="padding:22px;" id="cardSavings">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-            <span style="font-size:11px;font-weight:700;color:var(--emerald);">Savings</span>
-            <span id="labelSavings" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;">₹0</span>
-          </div>
-          <div class="budget-bar-track"><div id="fillSavings" class="budget-bar-fill" style="background:var(--emerald);width:0%"></div></div>
-          <div id="statSavings" style="font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;">0% utilized</div>
-        </div>
-      </div>
-
-      <!-- INCOME + BILLS -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;" class="animate-in delay-3">
-        <div class="glass-card" style="padding:24px;">
-          <div class="section-label">Income Allocation</div>
-          <div style="position:relative;margin-bottom:20px;">
-            <span style="position:absolute;left:0;bottom:8px;font-size:22px;font-weight:800;color:var(--text3);">₹</span>
-            <input id="monthlySalary" type="number" oninput="calcTargets()" placeholder="Monthly Income"
-              style="background:none;border:none;border-bottom:1px solid var(--border);outline:none;font-size:26px;font-weight:800;width:100%;padding-left:32px;padding-bottom:8px;color:var(--text);font-family:'Outfit',sans-serif;transition:border-color 0.3s;"
-              onfocus="this.style.borderBottomColor='var(--gold-border)'" onblur="this.style.borderBottomColor='var(--border)'">
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
-            <div>
-              <div class="section-label" style="color:var(--sapphire);">Needs %</div>
-              <input id="rNeeds" type="number" oninput="calcTargets()" class="luxury-input" value="50" style="text-align:center;font-weight:700;">
-            </div>
-            <div>
-              <div class="section-label" style="color:#c77dff;">Wants %</div>
-              <input id="rWants" type="number" oninput="calcTargets()" class="luxury-input" value="30" style="text-align:center;font-weight:700;">
-            </div>
-            <div>
-              <div class="section-label" style="color:var(--emerald);">Save %</div>
-              <input id="rSavings" type="number" oninput="calcTargets()" class="luxury-input" value="20" style="text-align:center;font-weight:700;">
-            </div>
-          </div>
-        </div>
-        <div class="glass-card" style="padding:24px;">
-          <div class="section-label">Fixed Overheads</div>
-          <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
-            <input id="billDesc" type="text" placeholder="Rent, Netflix..." class="luxury-input" style="flex:1;min-width:100px;">
-            <input id="billAmt" type="number" placeholder="₹" class="luxury-input" style="width:80px;">
-            <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);cursor:pointer;white-space:nowrap;">
-              <input type="checkbox" id="billRec" style="accent-color:var(--gold);"> Repeat
-            </label>
-            <button onclick="addBill()" class="btn-gold" style="padding:10px 16px;">+</button>
-          </div>
-          <div id="billList" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
-        </div>
-      </div>
-
-      <!-- TRANSACTION FORM -->
-      <div class="glass-card animate-in delay-4" style="padding:24px;margin-bottom:20px;background:linear-gradient(135deg,rgba(232,201,122,0.04),rgba(5,5,8,0));">
-        <div class="section-label" style="color:var(--gold);">New Transaction</div>
-        <div style="display:grid;grid-template-columns:auto 1fr auto 1fr 1fr auto;gap:10px;align-items:end;flex-wrap:wrap;">
-          <select id="entryDate" style="padding:12px 14px;"></select>
-          <select id="entryType" onchange="toggleWantsCat()" style="padding:12px 14px;">
-            <option value="need">🏠 Essential Need</option>
-            <option value="want">🍿 Personal Want</option>
-            <option value="saving">🏦 Asset/Saving</option>
-          </select>
-          <select id="wantCat" style="display:none;padding:12px 14px;">
-            <option value="Dining">🍔 Dining</option>
-            <option value="Shopping">🛍️ Shopping</option>
-            <option value="Fun">🎬 Fun</option>
-            <option value="Travel">🚗 Travel</option>
-          </select>
-          <input id="entryDesc" type="text" placeholder="Description" class="luxury-input">
-          <input id="entryAmt" type="number" placeholder="₹ Amount" class="luxury-input" style="font-weight:700;">
-          <button onclick="addEntry()" class="btn-gold">Commit</button>
-        </div>
-      </div>
-
-      <!-- GOAL -->
-      <div class="glass-card animate-in delay-5" style="padding:22px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:linear-gradient(135deg,rgba(74,158,255,0.05),rgba(5,5,8,0));">
-        <div style="min-width:200px;">
-          <div class="section-label">Primary Goal</div>
-          <div id="goalResult" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;font-style:italic;color:var(--gold);">Set a goal below →</div>
-        </div>
-        <input id="goalName" oninput="saveGoal()" type="text" placeholder="e.g. Real Estate, Emergency Fund" class="luxury-input" style="flex:2;min-width:150px;">
-        <input id="goalAmount" oninput="saveGoal()" type="number" placeholder="Target ₹" class="luxury-input" style="flex:1;min-width:120px;font-weight:700;">
-      </div>
-
-      <!-- HISTORY -->
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-        <div class="section-label" style="margin:0;">Transaction Ledger</div>
-        <button onclick="if(confirm('Clear month?')){localStorage.removeItem('budget-'+bMonth+'-'+bYear);renderBudget();}" style="background:none;border:none;color:var(--crimson);font-size:10px;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;">Clear ×</button>
-      </div>
-      <div id="history" style="display:flex;flex-direction:column;gap:8px;padding-bottom:40px;"></div>
-    </div>
-
-    <!-- ========== HABITS PAGE ========== -->
-    <div class="page" id="page-habits">
-      <div class="page-header animate-in">
-        <div class="page-eyebrow">Discipline Engine</div>
-        <h1 class="page-title" id="monthHeader">Habit <span>Matrix</span></h1>
-        <p class="page-subtitle">Real-time accountability grid · Only today can be marked</p>
-      </div>
-
-      <!-- FLOW TIMER -->
-      <div class="flow-panel animate-in delay-1" style="margin-bottom:28px;">
-        <div>
-          <div class="section-label" style="color:var(--gold);margin-bottom:8px;">Deep Work Protocol</div>
-          <div id="swDisplay" class="flow-time">00:00:00</div>
-          <div id="swStatus" style="font-size:11px;color:var(--text3);margin-top:6px;letter-spacing:1px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;">Ready for Session</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="display:flex;gap:8px;align-items:center;">
-            <div>
-              <div class="section-label">Today's Total</div>
-              <div id="dailyTotalDisp" style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--text);">0h 0m</div>
-            </div>
-            <div style="margin-left:24px;">
-              <div class="section-label">Flow State</div>
-              <div id="flowRank" style="font-size:12px;font-weight:700;color:var(--gold);font-family:'JetBrains Mono',monospace;">INITIATING</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:8px;">
-            <button id="swBtn" onclick="toggleFlow()" class="btn-gold" style="flex:1;">Start Flow</button>
-            <button onclick="toggleAmbient()" id="ambBtn" class="btn-glass" style="padding:11px 16px;font-size:16px;" title="Ambient sounds">🌧</button>
-          </div>
-          <button onclick="resetFlow()" style="background:none;border:none;color:var(--text3);font-size:10px;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s;" onmouseenter="this.style.color='var(--crimson)'" onmouseleave="this.style.color='var(--text3)'">End & Record Session</button>
-        </div>
-        <div id="sessHistory" style="display:flex;gap:8px;overflow-x:auto;flex:100%;padding-bottom:4px;margin-top:4px;"></div>
-      </div>
-
-      <!-- ADD HABIT -->
-      <div style="display:flex;gap:10px;margin-bottom:24px;align-items:center;flex-wrap:wrap;" class="animate-in delay-2">
-        <input id="hIcon" class="luxury-input" type="text" placeholder="⬡" style="width:52px;text-align:center;font-size:18px;padding:10px;">
-        <input id="hName" class="luxury-input" type="text" placeholder="New habit to track..." style="flex:1;min-width:200px;">
-        <button onclick="addHabit()" class="btn-gold">+ Add Habit</button>
-      </div>
-
-      <!-- HABITS GRID -->
-      <div id="habitsGrid" style="display:flex;flex-direction:column;gap:18px;" class="animate-in delay-3"></div>
-
-      <!-- GRATITUDE -->
-      <div class="glass-card glass-card-gold animate-in delay-4" style="padding:28px;margin-top:24px;margin-bottom:40px;">
-        <div class="section-label" style="color:var(--gold);">Daily Gratitude</div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <input id="grat1" oninput="localStorage.setItem('grat1',this.value)" class="luxury-input" placeholder="One thing I'm truly grateful for today...">
-          <input id="grat2" oninput="localStorage.setItem('grat2',this.value)" class="luxury-input" placeholder="A small win or beautiful moment...">
-        </div>
-      </div>
-    </div>
-
-  </div><!-- end #main -->
-</div><!-- end #app -->
-
-<!-- MOBILE NAV -->
-<div id="mob-nav">
-  <div class="mob-nav-items">
-    <button class="mob-nav-btn active" onclick="showPage('roadmap',this)"><span class="mn-icon">◈</span>Roadmap</button>
-    <button class="mob-nav-btn" onclick="showPage('journal',this)"><span class="mn-icon">✦</span>Journal</button>
-    <button class="mob-nav-btn" onclick="showPage('budget',this)"><span class="mn-icon">◎</span>Budget</button>
-    <button class="mob-nav-btn" onclick="showPage('habits',this)"><span class="mn-icon">⬡</span>Habits</button>
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Nail Art <span class="m-dot"></span></span>
+    <span class="marquee-item">Nail Extensions <span class="m-dot"></span></span>
+    <span class="marquee-item">Hair Colour <span class="m-dot"></span></span>
+    <span class="marquee-item">Precision Haircuts <span class="m-dot"></span></span>
+    <span class="marquee-item">Nanoplastia <span class="m-dot"></span></span>
+    <span class="marquee-item">Braids <span class="m-dot"></span></span>
+    <span class="marquee-item">Brows & Beauty <span class="m-dot"></span></span>
+    <span class="marquee-item">Premium Hair Care <span class="m-dot"></span></span>
+    <span class="marquee-item">Nail Art <span class="m-dot"></span></span>
+    <span class="marquee-item">Nail Extensions <span class="m-dot"></span></span>
+    <span class="marquee-item">Hair Colour <span class="m-dot"></span></span>
+    <span class="marquee-item">Precision Haircuts <span class="m-dot"></span></span>
   </div>
 </div>
 
-<!-- BUDGET REPORT MODAL -->
-<div id="reportModal">
-  <div class="modal-inner">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;">
+<section id="about">
+  <div class="about-grid">
+    <div class="about-photos reveal">
+      <div class="about-corner"></div>
+      <div class="ap p1"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80" alt="Salon styling"></div>
+      <div class="ap"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Nail styling"></div>
+      <div class="ap"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=80" alt="Beauty salon"></div>
+      <div class="about-badge"><div class="num">Top</div><div class="lbl">Rated in Area</div></div>
+    </div>
+    <div class="reveal">
+      <div class="s-tag">About Hair Cafe</div>
+      <h2 class="s-title">Luxury beauty with a <em>personal</em> touch.</h2>
+      <p class="s-sub">Hair Cafe By Krystal blends premium hair services, trending nail artistry, and a welcoming salon atmosphere. Clients praise the hygiene, skilled team, relaxed vibe, and thoughtful consultations that turn first visits into repeat bookings.</p>
+      <div class="about-bullets">
+        <div class="ab"><span class="ab-dot"></span>Premium haircuts, colour, braids, spa and advanced treatments</div>
+        <div class="ab"><span class="ab-dot"></span>Professional nail art, extensions, gel and acrylic services</div>
+        <div class="ab"><span class="ab-dot"></span>Known for clean ambience, careful consultation and polished results</div>
+        <div class="ab"><span class="ab-dot"></span>Popular with clients seeking luxury service in Wanowrie / Salunke Vihar</div>
+      </div>
+      <div class="about-stats">
+        <div class="a-stat-row"><div class="a-num">4.8</div><div class="a-vline"></div><div class="a-desc">Highly rated by clients for service, results, relaxing atmosphere, and professionalism.</div></div>
+        <div class="a-stat-row"><div class="a-num">264</div><div class="a-vline"></div><div class="a-desc">Google reviews building strong trust for hair, nails, treatments and beauty services.</div></div>
+        <div class="a-stat-row"><div class="a-num">10pm</div><div class="a-vline"></div><div class="a-desc">Open late enough for after-work appointments and premium self-care sessions.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="reveal">
+    <div class="s-tag">Signature Services</div>
+    <h2 class="s-title">Crafted for <em>beauty, care</em> and confidence.</h2>
+    <p class="s-sub">Built around the services clients mention most: trend-led cuts, tailored colour work, premium nail services, and treatment menus designed for visible results.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="sc reveal"><div class="sc-icon">💇</div><div class="sc-name">Haircuts & Styling</div><div class="sc-desc">Precision cuts, face-framing shapes, curls, soft layers and salon-finish styling with consultation-first service.</div><div class="sc-price">Tailored Consultation</div><div class="sc-arrow">→</div></div>
+    <div class="sc reveal"><div class="sc-icon">🎨</div><div class="sc-name">Hair Colour</div><div class="sc-desc">From glossy refreshes to statement colour, handled by stylists known for listening, advising and delivering clean results.</div><div class="sc-price">Custom Shades</div><div class="sc-arrow">→</div></div>
+    <div class="sc reveal"><div class="sc-icon">💅</div><div class="sc-name">Nail Art & Extensions</div><div class="sc-desc">A premium nail station for elegant minimal sets, bold art, gel nails, acrylics and long-lasting extensions.</div><div class="sc-price">Trending Designs</div><div class="sc-arrow">→</div></div>
+    <div class="sc reveal"><div class="sc-icon">✨</div><div class="sc-name">Treatments</div><div class="sc-desc">Nanoplastia, botox, spa and repair rituals aimed at softness, shine, frizz control and healthier looking hair.</div><div class="sc-price">Visible Results</div><div class="sc-arrow">→</div></div>
+    <div class="sc reveal"><div class="sc-icon">🪮</div><div class="sc-name">Braids & Texture Work</div><div class="sc-desc">Braids and texture-conscious styling handled with detail, comfort and neat finishing clients rave about.</div><div class="sc-price">Detail Focused</div><div class="sc-arrow">→</div></div>
+    <div class="sc reveal"><div class="sc-icon">🌿</div><div class="sc-name">Beauty & Brows</div><div class="sc-desc">Brows, facials and beauty add-ons delivered in a welcoming, hygienic and relaxing salon environment.</div><div class="sc-price">Polished Finish</div><div class="sc-arrow">→</div></div>
+    <div class="sc reveal"><div class="sc-icon">🧴</div><div class="sc-name">Hair Care Guidance</div><div class="sc-desc">Product advice and aftercare suggestions that help clients maintain the salon finish at home.</div><div class="sc-price">Expert Advice</div><div class="sc-arrow">→</div></div>
+    <div class="sc reveal"><div class="sc-icon">👑</div><div class="sc-name">Luxury Experience</div><div class="sc-desc">Premium feel, warm hospitality, aesthetic ambience and a service flow designed to feel calm, indulgent and memorable.</div><div class="sc-price">Salon Signature</div><div class="sc-arrow">→</div></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <div class="s-tag">Salon Mood</div>
+    <h2 class="s-title">Premium, polished, <em>Instagram-worthy</em> beauty.</h2>
+    <p class="s-sub">A visual language built for trust and aspiration — the same premium energy clients mention in reviews.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gi"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80" alt=""><div class="gi-overlay"><span class="gi-label">Salon Experience</span></div></div>
+    <div class="gi"><img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=900&q=80" alt=""><div class="gi-overlay"><span class="gi-label">Hair Colour</span></div></div>
+    <div class="gi"><img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=900&q=80" alt=""><div class="gi-overlay"><span class="gi-label">Nail Art</span></div></div>
+    <div class="gi"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=80" alt=""><div class="gi-overlay"><span class="gi-label">Beauty Lounge</span></div></div>
+    <div class="gi"><img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=900&q=80" alt=""><div class="gi-overlay"><span class="gi-label">Luxury Finish</span></div></div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="reviews-top reveal">
+    <div>
+      <div class="s-tag">Client Love</div>
+      <h2 class="s-title">4.8★ on <em>Google</em></h2>
+    </div>
+    <div class="rating-block">
       <div>
-        <div class="page-eyebrow">Certified Audit</div>
-        <h2 id="reportTitle" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;"></h2>
+        <div class="r-big">4.<span>8</span></div>
+        <div class="r-stars">★★★★★</div>
+        <div class="r-count">264 verified reviews</div>
       </div>
-      <div style="display:flex;gap:10px;">
-        <button onclick="window.print()" class="btn-glass">Print PDF</button>
-        <button onclick="toggleReport(false)" style="background:none;border:none;color:var(--text3);font-size:32px;cursor:pointer;padding:0 10px;transition:color 0.2s;" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text3)'">×</button>
+      <div class="r-bars" id="rbars">
+        <div class="rb-row"><span class="rb-lbl">5</span><div class="rb-track"><div class="rb-fill" data-w="90%"></div></div></div>
+        <div class="rb-row"><span class="rb-lbl">4</span><div class="rb-track"><div class="rb-fill" data-w="7%"></div></div></div>
+        <div class="rb-row"><span class="rb-lbl">3</span><div class="rb-track"><div class="rb-fill" data-w="2%"></div></div></div>
+        <div class="rb-row"><span class="rb-lbl">2</span><div class="rb-track"><div class="rb-fill" data-w="0.7%"></div></div></div>
+        <div class="rb-row"><span class="rb-lbl">1</span><div class="rb-track"><div class="rb-fill" data-w="0.3%"></div></div></div>
       </div>
-    </div>
-    <div class="glass-card" style="padding:32px;">
-      <div style="display:grid;grid-template-columns:1fr auto;gap:32px;margin-bottom:32px;align-items:center;">
-        <div id="reportSummary" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;"></div>
-        <div style="width:180px;height:180px;"><canvas id="allocChart"></canvas></div>
-      </div>
-      <table style="width:100%;border-collapse:collapse;">
-        <thead>
-          <tr style="border-bottom:1px solid var(--border);">
-            <th style="padding:12px 16px;text-align:left;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-family:'JetBrains Mono',monospace;font-weight:600;">Day</th>
-            <th style="padding:12px 16px;text-align:left;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-family:'JetBrains Mono',monospace;font-weight:600;">Category</th>
-            <th style="padding:12px 16px;text-align:left;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-family:'JetBrains Mono',monospace;font-weight:600;">Description</th>
-            <th style="padding:12px 16px;text-align:right;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-family:'JetBrains Mono',monospace;font-weight:600;">Amount</th>
-          </tr>
-        </thead>
-        <tbody id="reportTable"></tbody>
-      </table>
     </div>
   </div>
-</div>
 
-<audio id="ambAudio" loop>
-  <source src="https://www.soundjay.com/nature/sounds/rain-07.mp3" type="audio/mpeg">
-</audio>
+  <div class="slider-wrap reveal">
+    <div class="slider-track" id="st">
+      <div class="review-slide">
+        <div class="rc"><div class="rc-quote">"</div><p class="rc-text">Aftab truly understood my hair and gave me a haircut that felt right for my waves and face. That kind of trust is rare.</p><div class="rc-stars">★★★★★</div><div class="rc-name">Varsha Sanwale</div><div class="rc-meta">3 weeks ago</div></div>
+        <div class="rc"><div class="rc-quote">"</div><p class="rc-text">Purva’s braiding work was neat, detailed, and so professional. I felt comfortable throughout and the result looked amazing.</p><div class="rc-stars">★★★★★</div><div class="rc-name">Ruturaj Mane</div><div class="rc-meta">3 months ago</div></div>
+        <div class="rc"><div class="rc-quote">"</div><p class="rc-text">The atmosphere was clean, welcoming and relaxing from the moment I walked in. Loved the haircut and eyebrow shaping result.</p><div class="rc-stars">★★★★★</div><div class="rc-name">Aishwarya Todkar</div><div class="rc-meta">1 month ago</div></div>
+      </div>
+      <div class="review-slide">
+        <div class="rc"><div class="rc-quote">"</div><p class="rc-text">Got my cornrow braids done by Purva and the precision was incredible. She really understands detail, comfort and finish.</p><div class="rc-stars">★★★★★</div><div class="rc-name">Gem Bookings</div><div class="rc-meta">3 months ago</div></div>
+        <div class="rc"><div class="rc-quote">"</div><p class="rc-text">Zeeshan made my colour experience stress-free. He explained the process well and the whole team made me feel looked after.</p><div class="rc-stars">★★★★★</div><div class="rc-name">Divya Kanodia</div><div class="rc-meta">5 months ago</div></div>
+        <div class="rc"><div class="rc-quote">"</div><p class="rc-text">The salon has a premium feel, skilled staff and a great vibe. It’s one of those places you recommend after the first good visit.</p><div class="rc-stars">★★★★★</div><div class="rc-name">Anushka Banerjee</div><div class="rc-meta">1 month ago</div></div>
+      </div>
+    </div>
+
+    <div class="slider-controls">
+      <button class="s-btn" onclick="goSlide(-1)">←</button>
+      <div class="s-dots" id="sdots">
+        <span class="s-dot a" onclick="setSlide(0)"></span>
+        <span class="s-dot" onclick="setSlide(1)"></span>
+      </div>
+      <button class="s-btn" onclick="goSlide(1)">→</button>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="reveal">
+    <div class="s-tag">Meet the Team</div>
+    <h2 class="s-title">Names clients keep <em>coming back</em> for.</h2>
+    <p class="s-sub">Built around the specialists mentioned again and again in reviews — for cuts, braids, colour, nails, beauty and thoughtful consultation.</p>
+  </div>
+
+  <div class="team-grid">
+    <div class="tc reveal"><div class="tc-avatar"><div class="tc-avatar-letter">A</div><div class="tc-avatar-glow"></div></div><div class="tc-info"><div class="tc-name">Aftab</div><div class="tc-role">Hair Specialist</div><div class="tc-spec">Loved for haircuts, curl understanding and tailored guidance.</div></div></div>
+    <div class="tc reveal"><div class="tc-avatar"><div class="tc-avatar-letter">P</div><div class="tc-avatar-glow"></div></div><div class="tc-info"><div class="tc-name">Purva</div><div class="tc-role">Braids & Beauty</div><div class="tc-spec">Praised for braids, calm service and client comfort.</div></div></div>
+    <div class="tc reveal"><div class="tc-avatar"><div class="tc-avatar-letter">Z</div><div class="tc-avatar-glow"></div></div><div class="tc-info"><div class="tc-name">Zeeshan</div><div class="tc-role">Colour Expert</div><div class="tc-spec">Known for colour consultation, treatment knowledge and precision.</div></div></div>
+    <div class="tc reveal"><div class="tc-avatar"><div class="tc-avatar-letter">H</div><div class="tc-avatar-glow"></div></div><div class="tc-info"><div class="tc-name">Hema</div><div class="tc-role">Beauty Artist</div><div class="tc-spec">Mentioned for polished beauty services and warm support.</div></div></div>
+    <div class="tc reveal"><div class="tc-avatar"><div class="tc-avatar-letter">R</div><div class="tc-avatar-glow"></div></div><div class="tc-info"><div class="tc-name">Rakesh</div><div class="tc-role">Nail Artist</div><div class="tc-spec">Loved for flawless nail art and premium nail finishing.</div></div></div>
+    <div class="tc reveal"><div class="tc-avatar"><div class="tc-avatar-letter">S</div><div class="tc-avatar-glow"></div></div><div class="tc-info"><div class="tc-name">Sabby</div><div class="tc-role">Colour Consultant</div><div class="tc-spec">Trusted for shade recommendations and patient consultation.</div></div></div>
+    <div class="tc reveal"><div class="tc-avatar"><div class="tc-avatar-letter">N</div><div class="tc-avatar-glow"></div></div><div class="tc-info"><div class="tc-name">Neelam</div><div class="tc-role">Product Guide</div><div class="tc-spec">Helpful, informative and appreciated for product explanations.</div></div></div>
+    <div class="tc reveal"><div class="tc-avatar"><div class="tc-avatar-letter">S</div><div class="tc-avatar-glow"></div></div><div class="tc-info"><div class="tc-name">Saqib</div><div class="tc-role">Salon Professional</div><div class="tc-spec">Praised for professional approach and client handling.</div></div></div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="booking-grid">
+    <div class="booking-visual reveal">
+      <div class="s-tag">Book Your Visit</div>
+      <h2 class="s-title">Ready for your next <em>salon moment</em>?</h2>
+      <p class="s-sub">From hair transformations to elegant nail sets, Hair Cafe By Krystal is built for clients who want both results and experience.</p>
+
+      <div class="b-hl">
+        <div class="b-icon">☎</div>
+        <div><div class="b-hl-title">Call the salon</div><div class="b-hl-desc"><a href="tel:+918810407533">088104 07533</a></div></div>
+      </div>
+      <div class="b-hl">
+        <div class="b-icon">✆</div>
+        <div><div class="b-hl-title">WhatsApp booking</div><div class="b-hl-desc"><a href="https://wa.link" target="_blank">Open WhatsApp booking link</a></div></div>
+      </div>
+      <div class="b-hl">
+        <div class="b-icon">⌂</div>
+        <div><div class="b-hl-title">Visit the lounge</div><div class="b-hl-desc">Shop No. 3, Hindustan Vihar Society, Salunke Vihar Rd, next to Jashn, Clover Village, Wanowrie, Pune 411040</div></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form class="form" onsubmit="event.preventDefault(); alert('Thank you! Please connect this form to email, WhatsApp, or a backend before going live.');">
+        <div class="form-row2">
+          <div class="fg"><label class="fl">Full Name</label><input class="fi" placeholder="Your name"></div>
+          <div class="fg"><label class="fl">Phone Number</label><input class="fi" placeholder="+91"></div>
+        </div>
+        <div class="form-row2">
+          <div class="fg"><label class="fl">Service</label>
+            <select class="fs">
+              <option>Haircut & Styling</option>
+              <option>Hair Colour</option>
+              <option>Nail Art / Extensions</option>
+              <option>Nanoplastia / Treatment</option>
+              <option>Beauty & Brows</option>
+            </select>
+          </div>
+          <div class="fg"><label class="fl">Preferred Date</label><input type="date" class="fi"></div>
+        </div>
+        <div class="fg"><label class="fl">Your Notes</label><textarea class="fta" placeholder="Tell us about your desired look, nail design, colour idea, or preferred stylist"></textarea></div>
+        <button class="btn-submit" type="submit">Request Appointment</button>
+        <div class="form-note">For a live website, connect this form to WhatsApp, Formspree, Netlify Forms, or your backend.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-grid">
+    <div class="cb reveal">
+      <div class="c-icon">⌂</div>
+      <div>
+        <div class="c-lbl">Location</div>
+        <div class="c-val">Shop No. 3, Hindustan Vihar Society, Salunke Vihar Rd, next to Jashn, Clover Village, Wanowrie, Pune, Maharashtra 411040</div>
+      </div>
+    </div>
+    <div class="cb reveal">
+      <div class="c-icon">☎</div>
+      <div>
+        <div class="c-lbl">Call / WhatsApp</div>
+        <div class="c-val"><a href="tel:+918810407533">088104 07533</a><br><a href="https://wa.link" target="_blank">WhatsApp Booking Link</a></div>
+      </div>
+    </div>
+    <div class="cb reveal">
+      <div class="c-icon">⏰</div>
+      <div>
+        <div class="c-lbl">Hours</div>
+        <div class="c-val">Open daily · Closes 10 pm<div class="open-pill">Open Now</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div>
+      <div class="f-logo">Hair Cafe <span>By Krystal</span></div>
+      <div class="f-sub">Premium Hair · Nails · Beauty</div>
+      <div class="f-desc">Luxury beauty experiences, thoughtful consultations and premium results in Salunke Vihar, Pune.</div>
+      <div class="f-socials">
+        <a class="f-soc" href="#">IG</a>
+        <a class="f-soc" href="#">FB</a>
+        <a class="f-soc" href="https://wa.link" target="_blank">WA</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="f-col-title">Explore</div>
+      <ul class="f-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="f-col-title">Popular</div>
+      <ul class="f-links">
+        <li><a href="#services">Haircut</a></li>
+        <li><a href="#services">Hair Colour</a></li>
+        <li><a href="#services">Nail Extensions</a></li>
+        <li><a href="#services">Nanoplastia</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="f-col-title">Contact</div>
+      <ul class="f-links">
+        <li><a href="tel:+918810407533">088104 07533</a></li>
+        <li><a href="https://wa.link" target="_blank">WhatsApp Booking</a></li>
+        <li><a href="#">Wanowrie, Pune</a></li>
+        <li><a href="#booking">Book Appointment</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fb">
+    <div class="f-copy">© 2026 Hair Cafe By Krystal Pune. All rights reserved.</div>
+    <div class="f-deva">Premium salon landing page</div>
+  </div>
+</footer>
 
 <script>
-/* ============================================================
-   NEORAH 2026 — MASTER JAVASCRIPT ENGINE
-   ============================================================ */
+const nav = document.getElementById('nav');
+const prog = document.getElementById('prog');
+const backTop = document.getElementById('back-top');
+const reveals = document.querySelectorAll('.reveal');
+const fills = document.querySelectorAll('.rb-fill');
 
-// ===== CURSOR GLOW =====
-const cursorGlow = document.getElementById('cursorGlow');
-document.addEventListener('mousemove', e => {
-  cursorGlow.style.left = e.clientX + 'px';
-  cursorGlow.style.top = e.clientY + 'px';
-});
+function onScroll(){
+  const s = window.scrollY;
+  nav.classList.toggle('scrolled', s > 10);
+  backTop.classList.toggle('v', s > 500);
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (s / h) * 100 + '%';
+}
+window.addEventListener('scroll', onScroll); onScroll();
 
-// ===== ANIMATED BACKGROUND CANVAS =====
-(function initCanvas() {
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, orbs = [];
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function createOrb() {
-    return {
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 250 + 100,
-      dx: (Math.random() - 0.5) * 0.15,
-      dy: (Math.random() - 0.5) * 0.15,
-      hue: Math.random() > 0.5 ? 42 : 340, // gold or crimson
-      alpha: Math.random() * 0.04 + 0.01
-    };
-  }
-
-  for (let i = 0; i < 5; i++) orbs.push(createOrb());
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    orbs.forEach(o => {
-      const grad = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
-      grad.addColorStop(0, `hsla(${o.hue},70%,55%,${o.alpha})`);
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
-      ctx.fill();
-      o.x += o.dx; o.y += o.dy;
-      if (o.x < -o.r) o.x = W + o.r;
-      if (o.x > W + o.r) o.x = -o.r;
-      if (o.y < -o.r) o.y = H + o.r;
-      if (o.y > H + o.r) o.y = -o.r;
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-// ===== FLOATING PARTICLES =====
-(function initParticles() {
-  const container = document.getElementById('particles');
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 3 + 1;
-    const isGold = Math.random() > 0.6;
-    p.style.cssText = `
-      width:${size}px; height:${size}px;
-      left:${Math.random()*100}vw; top:${Math.random()*100}vh;
-      background:${isGold ? 'rgba(232,201,122,0.35)' : 'rgba(255,255,255,0.1)'};
-      animation: float-up ${12 + Math.random()*20}s linear ${Math.random()*10}s infinite;
-      box-shadow:${isGold ? '0 0 6px rgba(232,201,122,0.3)' : 'none'};
-    `;
-    container.appendChild(p);
-  }
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes float-up {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 0.5; }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('v');
+      if(entry.target.id === 'reviews'){
+        fills.forEach(f => f.style.width = f.dataset.w);
+      }
     }
-  `;
-  document.head.appendChild(style);
-})();
-
-// ===== MUSIC PLAYER ENGINE =====
-const tracks = [
-  { title: 'Deep Focus', artist: 'Lo-Fi Collective', url: 'https://www.bensound.com/bensound-music/bensound-slowmotion.mp3', emoji: '🎵' },
-  { title: 'Morning Light', artist: 'Ambient Works', url: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3', emoji: '☀️' },
-  { title: 'Study Flow', artist: 'Focus Lab', url: 'https://www.bensound.com/bensound-music/bensound-ukulele.mp3', emoji: '📚' },
-  { title: 'Night Mode', artist: 'Neorah Radio', url: 'https://www.bensound.com/bensound-music/bensound-relaxing.mp3', emoji: '🌙' },
-  { title: 'The Hustle', artist: 'Productivity Co.', url: 'https://www.bensound.com/bensound-music/bensound-goinghigher.mp3', emoji: '🚀' },
-];
-
-let curTrack = 0;
-let mpAudio = null;
-let mpPlaying = false;
-let mpInterval = null;
-
-function initPlayer() {
-  mpAudio = new Audio();
-  mpAudio.volume = 0.6;
-  mpAudio.addEventListener('ended', nextTrack);
-  mpAudio.addEventListener('timeupdate', updateProgress);
-  loadTrack(curTrack);
-}
-
-function loadTrack(idx) {
-  const t = tracks[idx];
-  document.getElementById('mpTitle').textContent = t.title;
-  document.getElementById('mpArtist').textContent = t.artist;
-  document.getElementById('mpAlbum').textContent = t.emoji;
-  if (mpAudio) {
-    mpAudio.src = t.url;
-    if (mpPlaying) mpAudio.play().catch(() => {});
-  }
-  document.getElementById('mpProgressFill').style.width = '0%';
-}
-
-function togglePlay() {
-  if (!mpAudio) { initPlayer(); }
-  if (mpPlaying) {
-    mpAudio.pause();
-    document.getElementById('mpPlayBtn').textContent = '▶';
-    document.getElementById('mpAlbum').style.animationPlayState = 'paused';
-    mpPlaying = false;
-  } else {
-    mpAudio.play().catch(() => showToast('Click play again to enable audio', 'gold'));
-    document.getElementById('mpPlayBtn').textContent = '⏸';
-    document.getElementById('mpAlbum').style.animationPlayState = 'running';
-    document.getElementById('mpAlbum').classList.add('playing');
-    mpPlaying = true;
-    showToast(`Now playing: ${tracks[curTrack].title}`, 'gold');
-  }
-}
-
-function nextTrack() {
-  curTrack = (curTrack + 1) % tracks.length;
-  loadTrack(curTrack);
-  if (mpPlaying) mpAudio.play().catch(() => {});
-}
-
-function prevTrack() {
-  curTrack = (curTrack - 1 + tracks.length) % tracks.length;
-  loadTrack(curTrack);
-  if (mpPlaying) mpAudio.play().catch(() => {});
-}
-
-function updateProgress() {
-  if (!mpAudio || !mpAudio.duration) return;
-  const pct = (mpAudio.currentTime / mpAudio.duration) * 100;
-  document.getElementById('mpProgressFill').style.width = pct + '%';
-}
-
-function seekTrack(e) {
-  if (!mpAudio || !mpAudio.duration) return;
-  const rect = e.currentTarget.getBoundingClientRect();
-  const pct = (e.clientX - rect.left) / rect.width;
-  mpAudio.currentTime = pct * mpAudio.duration;
-}
-
-function setVolume(v) {
-  if (mpAudio) mpAudio.volume = v / 100;
-}
-
-// ===== TOAST =====
-let toastTimer;
-function showToast(msg, type = 'success') {
-  clearTimeout(toastTimer);
-  const t = document.getElementById('toast');
-  const icons = { success: '✦', gold: '◈', error: '✕' };
-  document.getElementById('toast-icon').textContent = icons[type] || '✦';
-  document.getElementById('toast-msg').textContent = msg;
-  t.className = `toast show ${type}`;
-  toastTimer = setTimeout(() => t.className = 'toast', 3000);
-}
-
-// ===== PAGE NAVIGATION =====
-let currentPage = 'roadmap';
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.mob-nav-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  currentPage = id;
-  closeSidebar();
-  if (id === 'journal') renderJournal();
-  if (id === 'budget') renderBudget();
-  if (id === 'habits') renderHabits();
-}
-
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('mob-overlay').classList.remove('open');
-}
-
-// ===== COUNTDOWN =====
-const endOf2026 = new Date('January 1, 2027').getTime();
-const days2026 = Math.floor((endOf2026 - Date.now()) / 86400000);
-document.getElementById('countdown').textContent = days2026;
-document.getElementById('daysLeft').textContent = days2026;
-
-// ===== THEME =====
-function toggleThemeFn() {
-  showToast('Light mode coming soon — dark is premium 🖤', 'gold');
-}
-
-// ===== BACKUP =====
-function exportData() {
-  try {
-    const blob = new Blob([JSON.stringify(localStorage)], { type: 'application/json' });
-    saveAs(blob, `Neorah_Backup_${new Date().toISOString().split('T')[0]}.json`);
-    showToast('Backup exported successfully');
-  } catch(e) { showToast('Export failed', 'error'); }
-}
-
-/* =============================================
-   ROADMAP ENGINE
-   ============================================= */
-let pivot = new Date();
-
-function getSyncKey() { return pivot.toISOString().split('T')[0]; }
-function changeDay(d) { pivot.setDate(pivot.getDate() + d); renderTeam(); }
-
-function addMember() {
-  const name = prompt('Member name:');
-  if (!name?.trim()) return;
-  const role = prompt('Role / Title (e.g. Dev, Design):') || 'Team Member';
-  const k = getSyncKey();
-  let members = getData(`team-${k}`) || [];
-  members.push({ name: name.trim(), role, status: 'In-Progress', vibe: '🚀', done: '', plan: '' });
-  setData(`team-${k}`, members);
-  renderTeam();
-  showToast(`${name.trim()} added to sync`, 'gold');
-}
-
-function updateMember(i, field, value) {
-  const k = getSyncKey();
-  let m = getData(`team-${k}`) || [];
-  m[i][field] = value;
-  setData(`team-${k}`, m);
-  if (field === 'status') renderTeam(); else updateStats(m);
-}
-
-function removeMember(i) {
-  if (!confirm('Remove member?')) return;
-  const k = getSyncKey();
-  let m = getData(`team-${k}`) || [];
-  const n = m[i].name;
-  m.splice(i, 1);
-  setData(`team-${k}`, m);
-  renderTeam();
-  showToast(`${n} removed`);
-}
-
-function copyMd(i) {
-  const k = getSyncKey();
-  const m = (getData(`team-${k}`) || [])[i];
-  const md = `**${m.name}** (${m.role}) ${m.vibe}\n**Status:** ${m.status}\n**Done:** ${m.done || '—'}\n**Next:** ${m.plan || '—'}`;
-  navigator.clipboard.writeText(md).then(() => showToast('Copied to clipboard'));
-}
-
-function updateStats(members) {
-  const done = members.filter(m => m.status === 'Done').length;
-  const pct = members.length ? Math.round((done / members.length) * 100) : 0;
-  document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressPercent').textContent = pct + '%';
-  document.getElementById('memberCount').textContent = members.length;
-  document.getElementById('doneCount').textContent = done;
-}
-
-function renderTeam() {
-  const k = getSyncKey();
-  const members = getData(`team-${k}`) || [];
-  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('syncDateLabel').textContent = pivot.toLocaleDateString('en-US', opts);
-  updateStats(members);
-
-  const tbody = document.getElementById('teamBody');
-  if (!members.length) {
-    tbody.innerHTML = `<tr><td colspan="6" style="background:transparent;border:none;text-align:center;padding:60px 20px;color:var(--text3);font-size:13px;font-style:italic;">
-      No team members for this date. Add the first one above.</td></tr>`;
-    return;
-  }
-
-  const vibes = ['🚀','🔥','🧘','☕','🆘'];
-  const statusCls = { 'In-Progress': 'status-active', 'Review': 'status-review', 'Done': 'status-done' };
-  const statusLabel = { 'In-Progress': 'Active', 'Review': 'Review', 'Done': 'Done' };
-
-  tbody.innerHTML = members.map((m, i) => `
-    <tr class="team-row">
-      <td style="min-width:160px;">
-        <div style="font-weight:700;font-size:14px;margin-bottom:5px;">${m.name}</div>
-        <span style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);font-family:'JetBrains Mono',monospace;background:var(--glass);border:1px solid var(--border);padding:2px 8px;border-radius:6px;">${m.role}</span>
-      </td>
-      <td style="min-width:130px;">
-        <div style="display:flex;gap:4px;">
-          ${vibes.map(v => `<button class="vibe-btn ${m.vibe===v?'active':''}" onclick="updateMember(${i},'vibe','${v}')">${v}</button>`).join('')}
-        </div>
-      </td>
-      <td style="min-width:130px;">
-        <div class="status-pill ${statusCls[m.status]}" onclick="cycleStat(${i})" style="cursor:pointer;">
-          <span class="status-dot"></span>
-          ${statusLabel[m.status]}
-        </div>
-      </td>
-      <td style="min-width:200px;">
-        <textarea class="cell-ta" rows="2" oninput="updateMember(${i},'done',this.value)" placeholder="What's shipped...">${m.done||''}</textarea>
-      </td>
-      <td style="min-width:200px;">
-        <textarea class="cell-ta" rows="2" oninput="updateMember(${i},'plan',this.value)" placeholder="Tomorrow's focus...">${m.plan||''}</textarea>
-      </td>
-      <td style="text-align:right;white-space:nowrap;">
-        <button onclick="copyMd(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;transition:all 0.2s;" title="Copy markdown" onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--text3)'">⎘</button>
-        <button onclick="removeMember(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px 6px;border-radius:6px;transition:all 0.2s;" onmouseenter="this.style.color='var(--crimson)'" onmouseleave="this.style.color='var(--text3)'">×</button>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function cycleStat(i) {
-  const k = getSyncKey();
-  let m = getData(`team-${k}`) || [];
-  const order = ['In-Progress', 'Review', 'Done'];
-  const cur = order.indexOf(m[i].status);
-  m[i].status = order[(cur + 1) % 3];
-  setData(`team-${k}`, m);
-  renderTeam();
-}
-
-async function generateWordDoc() {
-  try {
-    const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, HeadingLevel, AlignmentType } = docx;
-    const k = getSyncKey();
-    const members = getData(`team-${k}`) || [];
-    if (!members.length) { showToast('No data for this date', 'error'); return; }
-    const rows = [
-      new TableRow({ children: ['Member','Role','Vibe','Status','Done Today','Next Priorities'].map(t => new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: t, bold: true })] })] })) }),
-      ...members.map(m => new TableRow({ children: [m.name,m.role||'',m.vibe,m.status,m.done||'—',m.plan||'—'].map(v => new TableCell({ children: [new Paragraph(v)] })) }))
-    ];
-    const doc = new Document({ sections: [{ children: [
-      new Paragraph({ text: `Neorah Team Report — ${pivot.toLocaleDateString()}`, heading: HeadingLevel.HEADING_1, alignment: AlignmentType.CENTER }),
-      new Paragraph(''),
-      new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows })
-    ]}] });
-    const blob = await Packer.toBlob(doc);
-    saveAs(blob, `Neorah_Team_${k}.docx`);
-    showToast('Report exported ✓', 'gold');
-  } catch(e) { showToast('Export failed', 'error'); }
-}
-
-/* =============================================
-   JOURNAL ENGINE
-   ============================================= */
-let jPivot = new Date();
-
-function getWeekKey() {
-  let s = new Date(jPivot);
-  s.setDate(jPivot.getDate() - jPivot.getDay() + 1);
-  return s.toISOString().split('T')[0];
-}
-
-function saveWeekTarget(type, val) {
-  localStorage.setItem(`week-${getWeekKey()}-${type}`, val);
-}
-
-function changeWeek(d) { jPivot.setDate(jPivot.getDate() + d); renderJournal(); }
-function setMood(dKey, mood) { localStorage.setItem(dKey + '-mood', mood); renderJournal(); }
-function setEnergy(dKey, lvl) { localStorage.setItem(dKey + '-energy', lvl); renderJournal(); }
-
-function renderJournal() {
-  let start = new Date(jPivot);
-  start.setDate(jPivot.getDate() - jPivot.getDay() + 1);
-  const wk = start.toISOString().split('T')[0];
-  document.getElementById('weekDisplay').textContent = `Week of ${start.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' })}`;
-  document.getElementById('weekStudy').value = localStorage.getItem(`week-${wk}-study`) || '';
-  document.getElementById('weekHealth').value = localStorage.getItem(`week-${wk}-health`) || '';
-  document.getElementById('weekCareer').value = localStorage.getItem(`week-${wk}-career`) || '';
-
-  const todayKey = new Date().toISOString().split('T')[0];
-  const grid = document.getElementById('journalGrid');
-  grid.innerHTML = '';
-  const moods = ['🔥','😊','😐','😴','⚡'];
-
-  for (let i = 0; i < 7; i++) {
-    let d = new Date(start);
-    d.setDate(start.getDate() + i);
-    const dKey = d.toISOString().split('T')[0];
-    const isToday = dKey === todayKey;
-    const savedMood = localStorage.getItem(dKey + '-mood');
-    const savedEnergy = parseInt(localStorage.getItem(dKey + '-energy')) || 0;
-    const isSunday = d.getDay() === 0;
-
-    const moodBtns = moods.map(v => `<button class="mood-btn ${savedMood===v?'active':''}" onclick="setMood('${dKey}','${v}')">${v}</button>`).join('');
-    const eDots = [1,2,3,4,5].map(n => `<div class="e-dot ${savedEnergy>=n?'lit':''}" onclick="setEnergy('${dKey}',${n})"></div>`).join('');
-    const slots = ['AM','PM','EVE'].map(s => `
-      <div class="slot-block">
-        <span class="slot-label">${s}</span>
-        <input class="slot-input" oninput="localStorage.setItem('${dKey}-slot-${s}',this.value)" value="${localStorage.getItem(dKey+'-slot-'+s)||''}" placeholder="...">
-      </div>`).join('');
-    const extra = isSunday ? `
-      <div style="background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:10px;padding:10px 12px;">
-        <div class="section-label" style="color:var(--gold);margin-bottom:6px;">📊 Weekly Audit</div>
-        <textarea class="j-field" rows="2" oninput="localStorage.setItem('${wk}-audit',this.value)" placeholder="How was your discipline?">${localStorage.getItem(wk+'-audit')||''}</textarea>
-      </div>` : `
-      <div>
-        <div class="section-label" style="color:var(--crimson);">⚠ Obstacle</div>
-        <textarea class="j-field" rows="2" oninput="localStorage.setItem('${dKey}-challenge',this.value)" placeholder="What blocked you...">${localStorage.getItem(dKey+'-challenge')||''}</textarea>
-      </div>`;
-
-    grid.innerHTML += `
-      <div class="day-card ${isToday?'today':''}" style="animation-delay:${i*0.04}s;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-          <div>
-            <div class="day-name">${d.toLocaleDateString('en-US',{weekday:'long'})}</div>
-            <div class="day-num">${d.toLocaleDateString('en-US',{day:'numeric',month:'short'})}</div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
-            <div style="display:flex;gap:3px;">${moodBtns}</div>
-            <div style="display:flex;gap:4px;align-items:center;">
-              <span style="font-size:7px;color:var(--text3);letter-spacing:1.5px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;margin-right:3px;">PWR</span>
-              ${eDots}
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;gap:6px;">${slots}</div>
-        <div>
-          <div class="section-label" style="color:var(--gold);">🏆 Win of the Day</div>
-          <input class="win-field" oninput="localStorage.setItem('${dKey}-win',this.value)" value="${localStorage.getItem(dKey+'-win')||''}" placeholder="Biggest victory today...">
-        </div>
-        <div>
-          <div class="section-label">💡 Reflection</div>
-          <textarea class="j-field" rows="3" oninput="localStorage.setItem('${dKey}-note',this.value)" placeholder="What did I learn...">${localStorage.getItem(dKey+'-note')||''}</textarea>
-        </div>
-        ${extra}
-        <div>
-          <div class="section-label" style="color:var(--emerald);">🎯 Next Steps</div>
-          <textarea class="j-field" rows="2" oninput="localStorage.setItem('${dKey}-goal',this.value)" placeholder="Tomorrow's priorities...">${localStorage.getItem(dKey+'-goal')||''}</textarea>
-        </div>
-      </div>`;
-  }
-}
-
-/* =============================================
-   BUDGET ENGINE
-   ============================================= */
-let bMonth = new Date().getMonth(), bYear = new Date().getFullYear();
-let bChart = null;
-
-function getData(k) { try { return JSON.parse(localStorage.getItem(k)); } catch(e) { return null; } }
-function setData(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
-
-function initBudget() {
-  document.getElementById('selMonth').value = bMonth;
-  document.getElementById('selYear').value = bYear;
-  document.getElementById('goalName').value = localStorage.getItem('goalN') || '';
-  document.getElementById('goalAmount').value = localStorage.getItem('goalA') || '';
-  handleRecurring();
-  setupDateDrop();
-  loadBudgetMonth();
-}
-
-function handleRecurring() {
-  const rec = getData('recurringBills') || [];
-  if (!rec.length) return;
-  const cur = getData(`bills-${bMonth}-${bYear}`) || [];
-  rec.forEach(rb => { if (!cur.find(cb => cb.desc === rb.desc)) cur.push({ ...rb, id: Date.now() + Math.random() }); });
-  setData(`bills-${bMonth}-${bYear}`, cur);
-}
-
-function setupDateDrop() {
-  const sel = document.getElementById('entryDate');
-  sel.innerHTML = '';
-  const today = new Date().getDate();
-  const days = new Date(bYear, bMonth + 1, 0).getDate();
-  for (let i = 1; i <= days; i++) {
-    const o = document.createElement('option');
-    o.value = i; o.textContent = `Day ${i}`;
-    if (i === today) o.selected = true;
-    sel.appendChild(o);
-  }
-}
-
-function loadBudgetMonth() {
-  const cfg = getData(`config-${bMonth}-${bYear}`) || { salary:'', rn:50, rw:30, rs:20 };
-  document.getElementById('monthlySalary').value = cfg.salary;
-  document.getElementById('rNeeds').value = cfg.rn;
-  document.getElementById('rWants').value = cfg.rw;
-  document.getElementById('rSavings').value = cfg.rs;
-  renderBills();
-  renderBudget();
-}
-
-function changeDate() {
-  bMonth = parseInt(document.getElementById('selMonth').value);
-  bYear = parseInt(document.getElementById('selYear').value);
-  handleRecurring(); setupDateDrop(); loadBudgetMonth();
-}
-
-function calcTargets() {
-  setData(`config-${bMonth}-${bYear}`, {
-    salary: document.getElementById('monthlySalary').value,
-    rn: document.getElementById('rNeeds').value,
-    rw: document.getElementById('rWants').value,
-    rs: document.getElementById('rSavings').value
   });
-  renderBudget();
+},{threshold:.18});
+
+reveals.forEach(el => io.observe(el));
+document.querySelectorAll('section').forEach(el => io.observe(el));
+
+function openMob(){ document.getElementById('mob-nav').classList.add('open'); }
+function closeMob(){ document.getElementById('mob-nav').classList.remove('open'); }
+document.getElementById('mob-close').addEventListener('click', closeMob);
+
+let slide = 0;
+const st = document.getElementById('st');
+const dots = document.querySelectorAll('.s-dot');
+function renderSlide(){
+  st.style.transform = `translateX(-${slide * 100}%)`;
+  dots.forEach((d,i)=>d.classList.toggle('a', i===slide));
 }
-
-function addBill() {
-  const desc = document.getElementById('billDesc').value;
-  const amt = parseFloat(document.getElementById('billAmt').value);
-  const isRec = document.getElementById('billRec').checked;
-  if (!desc || !amt) return;
-  const bills = getData(`bills-${bMonth}-${bYear}`) || [];
-  bills.push({ desc, amt, id: Date.now(), recurring: isRec });
-  setData(`bills-${bMonth}-${bYear}`, bills);
-  if (isRec) {
-    const rec = getData('recurringBills') || [];
-    if (!rec.find(r => r.desc === desc)) { rec.push({ desc, amt, recurring: true }); setData('recurringBills', rec); }
-  }
-  document.getElementById('billDesc').value = '';
-  document.getElementById('billAmt').value = '';
-  document.getElementById('billRec').checked = false;
-  renderBills(); renderBudget();
+function goSlide(n){
+  slide = (slide + n + 2) % 2;
+  renderSlide();
 }
-
-function renderBills() {
-  const bills = getData(`bills-${bMonth}-${bYear}`) || [];
-  document.getElementById('billList').innerHTML = bills.map(b => `
-    <div class="bill-tag">${b.recurring?'↻ ':''}${b.desc}: <strong style="color:var(--sapphire);margin:0 6px;">₹${b.amt.toLocaleString()}</strong>
-    <button onclick="removeBill(${b.id},'${b.desc}')" style="background:none;border:none;color:var(--crimson);cursor:pointer;font-size:14px;padding:0 2px;">×</button></div>`).join('');
+function setSlide(n){
+  slide = n;
+  renderSlide();
 }
-
-function removeBill(id, desc) {
-  let bills = getData(`bills-${bMonth}-${bYear}`) || [];
-  setData(`bills-${bMonth}-${bYear}`, bills.filter(b => b.id !== id));
-  let rec = getData('recurringBills') || [];
-  setData('recurringBills', rec.filter(r => r.desc !== desc));
-  renderBills(); renderBudget();
-}
-
-function toggleWantsCat() {
-  const wc = document.getElementById('wantCat');
-  wc.style.display = document.getElementById('entryType').value === 'want' ? 'block' : 'none';
-}
-
-function addEntry() {
-  const date = document.getElementById('entryDate').value;
-  const type = document.getElementById('entryType').value;
-  const cat = type === 'want' ? document.getElementById('wantCat').value : null;
-  const desc = document.getElementById('entryDesc').value;
-  const amt = parseFloat(document.getElementById('entryAmt').value);
-  if (!desc || !amt) return;
-  const entries = getData(`budget-${bMonth}-${bYear}`) || [];
-  entries.push({ date, type, desc, amt, cat, id: Date.now() });
-  setData(`budget-${bMonth}-${bYear}`, entries);
-  document.getElementById('entryDesc').value = '';
-  document.getElementById('entryAmt').value = '';
-  renderBudget();
-  showToast('Transaction recorded', 'gold');
-}
-
-function removeEntry(id) {
-  let e = getData(`budget-${bMonth}-${bYear}`) || [];
-  setData(`budget-${bMonth}-${bYear}`, e.filter(x => x.id !== id));
-  renderBudget();
-}
-
-function renderBudget() {
-  const cfg = getData(`config-${bMonth}-${bYear}`) || { salary:0, rn:50, rw:30, rs:20 };
-  const salary = parseFloat(cfg.salary) || 0;
-  const entries = getData(`budget-${bMonth}-${bYear}`) || [];
-  const bills = getData(`bills-${bMonth}-${bYear}`) || [];
-  const billTotal = bills.reduce((s,b) => s + b.amt, 0);
-  let spN = billTotal, spW = 0, spS = 0, lifeS = 0, lifeE = 0;
-
-  for (let i = 0; i < localStorage.length; i++) {
-    const k = localStorage.key(i);
-    if (k.startsWith('budget-')) {
-      try {
-        const d = JSON.parse(localStorage.getItem(k));
-        if (Array.isArray(d)) d.forEach(e => { if (e.type === 'saving') lifeS += e.amt; else lifeE += e.amt; });
-      } catch(e) {}
-    }
-  }
-
-  entries.forEach(e => {
-    if (e.type === 'need') spN += e.amt;
-    else if (e.type === 'want') spW += e.amt;
-    else spS += e.amt;
-  });
-
-  const tN = salary * (cfg.rn / 100), tW = salary * (cfg.rw / 100), tS = salary * (cfg.rs / 100);
-  const balance = salary - (spN + spW + spS);
-  const daysInM = new Date(bYear, bMonth + 1, 0).getDate();
-  const now2 = new Date();
-  const isCurM = now2.getMonth() === bMonth && now2.getFullYear() === bYear;
-  const dLeft = isCurM ? Math.max(1, daysInM - now2.getDate() + 1) : daysInM;
-  const safeDaily = (tW - spW) > 0 ? (tW - spW) / dLeft : 0;
-
-  document.getElementById('accountBalance').textContent = '₹' + Math.abs(balance).toLocaleString();
-  document.getElementById('accountBalance').className = 'balance-display ' + (balance >= 0 ? 'balance-pos' : 'balance-neg');
-  document.getElementById('dailyLimit').textContent = '₹' + Math.floor(safeDaily).toLocaleString();
-  document.getElementById('ytdSavings').textContent = '₹' + lifeS.toLocaleString();
-  document.getElementById('ytdExpenses').textContent = '₹' + lifeE.toLocaleString();
-  const mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  document.getElementById('viewingDate').textContent = `${mNames[bMonth]} ${bYear} Audit`;
-  document.getElementById('labelNeeds').textContent = '₹' + tN.toLocaleString();
-  document.getElementById('labelWants').textContent = '₹' + tW.toLocaleString();
-  document.getElementById('labelSavings').textContent = '₹' + tS.toLocaleString();
-
-  updateBudgetBar('fillNeeds','statNeeds',spN,tN,'cardNeeds','var(--sapphire)');
-  updateBudgetBar('fillWants','statWants',spW,tW,'cardWants','#c77dff');
-  updateBudgetBar('fillSavings','statSavings',spS,tS,'cardSavings','var(--emerald)');
-
-  const history = document.getElementById('history');
-  history.innerHTML = '';
-  const typeC = { need:'var(--sapphire)', want:'#c77dff', saving:'var(--emerald)' };
-  const typeL = { need:'Essential', want:'Personal', saving:'Asset' };
-  entries.sort((a,b) => b.id - a.id).forEach(e => {
-    history.innerHTML += `
-      <div style="background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;transition:all 0.3s;cursor:default;" onmouseenter="this.style.background='var(--glass2)';this.style.borderColor='var(--border2)'" onmouseleave="this.style.background='var(--glass)';this.style.borderColor='var(--border)'">
-        <div>
-          <div style="font-size:9px;font-family:'JetBrains Mono',monospace;color:${typeC[e.type]};font-weight:600;letter-spacing:1px;margin-bottom:4px;">Day ${e.date} · ${typeL[e.type]}${e.cat?' · '+e.cat:''}</div>
-          <div style="font-size:13px;font-weight:600;">${e.desc}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;">
-          <span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;">₹${e.amt.toLocaleString()}</span>
-          <button onclick="removeEntry(${e.id})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;padding:2px 6px;border-radius:6px;transition:color 0.2s;" onmouseenter="this.style.color='var(--crimson)'" onmouseleave="this.style.color='var(--text3)'">×</button>
-        </div>
-      </div>`;
-  });
-  calcGoal();
-}
-
-function updateBudgetBar(fillId, statId, spent, target, cardId, color) {
-  const pct = target > 0 ? (spent / target) * 100 : 0;
-  const fill = document.getElementById(fillId);
-  fill.style.width = Math.min(pct, 100) + '%';
-  fill.style.background = pct > 100 ? 'var(--crimson)' : color;
-  document.getElementById(statId).textContent = `${pct.toFixed(0)}% · ₹${spent.toLocaleString()}`;
-  const card = document.getElementById(cardId);
-  card.style.borderColor = pct > 90 ? 'rgba(200,68,90,0.3)' : 'var(--border)';
-}
-
-function saveGoal() {
-  localStorage.setItem('goalN', document.getElementById('goalName').value);
-  localStorage.setItem('goalA', document.getElementById('goalAmount').value);
-  calcGoal();
-}
-
-function calcGoal() {
-  const name = document.getElementById('goalName').value || 'Set a goal';
-  const amt = parseFloat(document.getElementById('goalAmount').value) || 0;
-  const sal = parseFloat(document.getElementById('monthlySalary').value) || 0;
-  const sp = parseFloat(document.getElementById('rSavings').value) || 0;
-  const ms = sal * (sp / 100);
-  const res = document.getElementById('goalResult');
-  if (ms > 0 && amt > 0) {
-    const mo = Math.ceil(amt / ms);
-    res.textContent = `"${name}" — ${mo} month${mo!==1?'s':''} to target`;
-  } else { res.textContent = `"${name}" — enter income to calculate`; }
-}
-
-function toggleReport(show) {
-  const m = document.getElementById('reportModal');
-  if (show) { m.style.display = 'block'; renderReport(); } else { m.style.display = 'none'; }
-}
-
-function renderReport() {
-  const entries = getData(`budget-${bMonth}-${bYear}`) || [];
-  const bills = getData(`bills-${bMonth}-${bYear}`) || [];
-  const cfg = getData(`config-${bMonth}-${bYear}`) || { salary:0 };
-  const salary = parseFloat(cfg.salary) || 0;
-  const mNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('reportTitle').textContent = `${mNames[bMonth]} ${bYear}`;
-  const table = document.getElementById('reportTable');
-  table.innerHTML = '';
-  let sums = { need:0, want:0, saving:0 };
-  bills.forEach(b => {
-    sums.need += b.amt;
-    table.innerHTML += `<tr style="border-bottom:1px solid var(--border);"><td style="padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);">FIXED</td><td style="padding:12px 16px;font-size:11px;color:var(--sapphire);">Essential</td><td style="padding:12px 16px;font-size:12px;font-weight:600;">${b.desc}</td><td style="padding:12px 16px;text-align:right;font-family:'Playfair Display',serif;font-weight:700;font-size:15px;">₹${b.amt.toLocaleString()}</td></tr>`;
-  });
-  const tC = { need:'var(--sapphire)', want:'#c77dff', saving:'var(--emerald)' };
-  const tL = { need:'Essential', want:'Personal', saving:'Asset' };
-  entries.sort((a,b) => a.date - b.date).forEach(e => {
-    sums[e.type] += e.amt;
-    table.innerHTML += `<tr style="border-bottom:1px solid var(--border);"><td style="padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);">Day ${e.date}</td><td style="padding:12px 16px;font-size:11px;color:${tC[e.type]};">${tL[e.type]}${e.cat?' · '+e.cat:''}</td><td style="padding:12px 16px;font-size:12px;font-weight:600;">${e.desc}</td><td style="padding:12px 16px;text-align:right;font-family:'Playfair Display',serif;font-weight:700;font-size:15px;">₹${e.amt.toLocaleString()}</td></tr>`;
-  });
-  const net = salary - (sums.need + sums.want + sums.saving);
-  document.getElementById('reportSummary').innerHTML = `
-    <div style="background:rgba(74,158,255,0.06);border:1px solid rgba(74,158,255,0.15);border-radius:14px;padding:18px;">
-      <div class="section-label" style="color:var(--sapphire);">Needs</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;">₹${sums.need.toLocaleString()}</div>
-    </div>
-    <div style="background:rgba(199,125,255,0.06);border:1px solid rgba(199,125,255,0.15);border-radius:14px;padding:18px;">
-      <div class="section-label" style="color:#c77dff;">Wants</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;">₹${sums.want.toLocaleString()}</div>
-    </div>
-    <div style="background:rgba(46,216,168,0.06);border:1px solid rgba(46,216,168,0.15);border-radius:14px;padding:18px;">
-      <div class="section-label" style="color:var(--emerald);">Savings</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;">₹${sums.saving.toLocaleString()}</div>
-    </div>
-    <div style="background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:14px;padding:18px;">
-      <div class="section-label" style="color:var(--gold);">Net Balance</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:${net>=0?'var(--gold)':'var(--crimson)'};">₹${Math.abs(net).toLocaleString()}</div>
-    </div>`;
-  if (bChart) bChart.destroy();
-  bChart = new Chart(document.getElementById('allocChart'), {
-    type: 'doughnut',
-    data: { labels:['Needs','Wants','Savings'], datasets:[{ data:[sums.need,sums.want,sums.saving], backgroundColor:['#4a9eff','#c77dff','#2ed8a8'], borderWidth:0 }] },
-    options: { plugins:{ legend:{ display:false } }, cutout:'72%', animation:{ animateRotate:true, duration:800 } }
-  });
-}
-
-/* =============================================
-   HABITS ENGINE
-   ============================================= */
-let habits = getData('habits') || [{ name:'Meditation', icon:'🧘' }, { name:'Exercise', icon:'💪' }];
-const nowH = new Date();
-const hM = nowH.getMonth(), hD = nowH.getDate(), hY = nowH.getFullYear();
-const mNames2 = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-let swSecs = parseInt(localStorage.getItem('swSeconds')) || 0;
-let swDaily = parseInt(localStorage.getItem(`swTotal-${hD}`)) || 0;
-let swRunning = localStorage.getItem('swRunning') === 'true';
-let swInterval = null;
-let ambPlaying = false;
-
-function syncFlow() {
-  if (swRunning) {
-    const start = parseInt(localStorage.getItem('swStartTime'));
-    swSecs = Math.floor((Date.now() - start) / 1000);
-    updateFlowDisplay();
-  }
-}
-
-function updateFlowDisplay() {
-  const h = Math.floor(swSecs/3600), m = Math.floor((swSecs%3600)/60), s = swSecs%60;
-  const disp = document.getElementById('swDisplay');
-  disp.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  disp.className = 'flow-time' + (swRunning ? ' running' : '');
-  const rank = document.getElementById('flowRank');
-  if (swSecs > 7200) rank.textContent = 'DEEP MASTER';
-  else if (swSecs > 3600) rank.textContent = 'FLOW STATE';
-  else if (swSecs > 1500) rank.textContent = 'MOMENTUM';
-  else if (swSecs > 300) rank.textContent = 'WARMING UP';
-  else rank.textContent = 'INITIATING';
-  localStorage.setItem('swSeconds', swSecs);
-}
-
-function toggleFlow() {
-  const btn = document.getElementById('swBtn');
-  if (swRunning) {
-    clearInterval(swInterval); swInterval = null;
-    swRunning = false;
-    localStorage.setItem('swRunning', 'false');
-    btn.textContent = 'Resume Flow';
-    document.getElementById('swStatus').textContent = 'Session Paused';
-    if (ambPlaying) toggleAmbient();
-  } else {
-    swRunning = true;
-    localStorage.setItem('swRunning', 'true');
-    localStorage.setItem('swStartTime', Date.now() - (swSecs * 1000));
-    document.getElementById('swStatus').textContent = 'Deep Focus Active';
-    swInterval = setInterval(syncFlow, 1000);
-    btn.textContent = 'Pause Flow';
-    showToast('Flow session started 🎯', 'gold');
-  }
-  updateFlowDisplay();
-}
-
-function resetFlow() {
-  if (!confirm('End session and record work?')) return;
-  swDaily += swSecs;
-  localStorage.setItem(`swTotal-${hD}`, swDaily);
-  let hist = getData('swHistory') || [];
-  hist.unshift({ time: swSecs, date: new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' }) });
-  setData('swHistory', hist.slice(0, 6));
-  clearInterval(swInterval); swInterval = null;
-  swRunning = false; swSecs = 0;
-  localStorage.setItem('swRunning', 'false');
-  localStorage.setItem('swSeconds', 0);
-  document.getElementById('swBtn').textContent = 'Start Flow';
-  document.getElementById('swStatus').textContent = 'Session Recorded ✓';
-  updateFlowDisplay();
-  updateFlowHistory();
-  showToast(`Session saved — ${Math.floor(swSecs/60)} min recorded`, 'gold');
-}
-
-function updateFlowHistory() {
-  const th = Math.floor(swDaily/3600), tm = Math.floor((swDaily%3600)/60);
-  document.getElementById('dailyTotalDisp').textContent = `${th}h ${tm}m`;
-  const hist = getData('swHistory') || [];
-  document.getElementById('sessHistory').innerHTML = hist.map(item => `
-    <div style="background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:10px 14px;flex-shrink:0;">
-      <div style="font-size:8px;color:var(--text3);font-family:'JetBrains Mono',monospace;letter-spacing:1px;">${item.date}</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--text);margin-top:2px;">${Math.floor(item.time/60)}m</div>
-    </div>`).join('');
-}
-
-function toggleAmbient() {
-  const audio = document.getElementById('ambAudio');
-  const btn = document.getElementById('ambBtn');
-  if (ambPlaying) { audio.pause(); btn.style.background='var(--glass)'; btn.style.borderColor='var(--border)'; }
-  else { audio.play().catch(()=>{}); btn.style.background='var(--gold-dim)'; btn.style.borderColor='var(--gold-border)'; showToast('Rain ambience on 🌧', 'gold'); }
-  ambPlaying = !ambPlaying;
-}
-
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && swRunning) syncFlow(); });
-
-function calcStreak(name) {
-  let streak = 0, check = new Date(); check.setDate(check.getDate()-1);
-  while(true) {
-    if (localStorage.getItem(`h-${name}-${check.getMonth()}-${check.getDate()}`) === 'true') { streak++; check.setDate(check.getDate()-1); } else break;
-  }
-  if (localStorage.getItem(`h-${name}-${hM}-${hD}`) === 'true') streak++;
-  return streak;
-}
-
-function renderHabits() {
-  document.getElementById('monthHeader').innerHTML = `${mNames2[hM]} <span>Matrix</span>`;
-  document.getElementById('grat1').value = localStorage.getItem('grat1') || '';
-  document.getElementById('grat2').value = localStorage.getItem('grat2') || '';
-  const daysInM = new Date(hY, hM+1, 0).getDate();
-  const grid = document.getElementById('habitsGrid');
-  grid.innerHTML = '';
-
-  habits.forEach((h, hi) => {
-    const name = h.name || h, icon = h.icon || '⬡';
-    let done = 0;
-    for (let d = 1; d <= daysInM; d++) if (localStorage.getItem(`h-${name}-${hM}-${d}`) === 'true') done++;
-    const pct = Math.round((done/daysInM)*100);
-    const streak = calcStreak(name);
-
-    const circles = Array.from({length:daysInM}, (_,idx) => {
-      const d = idx+1, k = `h-${name}-${hM}-${d}`;
-      const isDone = localStorage.getItem(k) === 'true';
-      const isToday = d === hD, isFuture = d > hD;
-      let cls = 'h-circle';
-      if (isDone) cls += ' done';
-      if (isToday) cls += ' today';
-      if (isFuture) cls += ' locked';
-      return `<div class="${cls}" onclick="toggleHabit('${k}',${d})">${d}</div>`;
-    }).join('');
-
-    grid.innerHTML += `
-      <div class="habit-card-wrap" style="animation-delay:${hi*0.05}s;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-          <div>
-            <div style="font-weight:700;font-size:15px;margin-bottom:6px;">${icon} ${name}</div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <span class="streak-badge">🔥 ${streak} Day Streak</span>
-              <span style="font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;">${done}/${daysInM} · ${pct}%</span>
-            </div>
-          </div>
-          <button onclick="removeHabit(${hi})" style="background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:2px 6px;border-radius:6px;transition:color 0.2s;" onmouseenter="this.style.color='var(--crimson)'" onmouseleave="this.style.color='var(--text3)'">×</button>
-        </div>
-        <div class="progress-track" style="margin-bottom:16px;"><div class="progress-fill" style="width:${pct}%"></div></div>
-        <div style="display:flex;flex-wrap:wrap;gap:5px;">${circles}</div>
-      </div>`;
-  });
-
-  if (swRunning && !swInterval) {
-    document.getElementById('swBtn').textContent = 'Pause Flow';
-    swInterval = setInterval(syncFlow, 1000);
-    syncFlow();
-  }
-  updateFlowDisplay();
-  updateFlowHistory();
-}
-
-function toggleHabit(key, day) {
-  if (day > hD) { showToast('Cannot pre-fill future dates ⚠', 'error'); return; }
-  if (day < hD) { showToast('Can only update today\'s habits', 'error'); return; }
-  const cur = localStorage.getItem(key) === 'true';
-  localStorage.setItem(key, !cur);
-  renderHabits();
-  if (!cur) showToast('Habit marked complete! 🔥', 'gold');
-}
-
-function addHabit() {
-  const v = document.getElementById('hName').value.trim();
-  const icon = document.getElementById('hIcon').value.trim() || '⬡';
-  if (!v) return;
-  habits.push({ name: v, icon });
-  setData('habits', habits);
-  renderHabits();
-  document.getElementById('hName').value = '';
-  document.getElementById('hIcon').value = '';
-  showToast(`"${v}" added to your matrix`, 'gold');
-}
-
-function removeHabit(i) {
-  if (!confirm('Delete this habit?')) return;
-  habits.splice(i, 1);
-  setData('habits', habits);
-  renderHabits();
-}
-
-/* =============================================
-   INIT
-   ============================================= */
-window.onload = function() {
-  renderTeam();
-  initBudget();
-  renderJournal();
-  // Restore flow timer if running
-  if (swRunning) {
-    syncFlow();
-    document.getElementById('swStatus').textContent = 'Deep Focus Active';
-    document.getElementById('swBtn').textContent = 'Pause Flow';
-    swInterval = setInterval(syncFlow, 1000);
-  }
-};
+setInterval(()=>goSlide(1), 5500);
+renderSlide();
 </script>
 </body>
 </html>
